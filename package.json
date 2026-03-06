@@ -1,0 +1,13 @@
+{
+    "name": "luany-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "concurrently \"php luany serve\" \"browser-sync start --proxy localhost:8000 --files 'views/**/*.lte, public/assets/**/*'\"",
+        "watch": "browser-sync start --proxy localhost:8000 --files 'views/**/*.lte, public/assets/**/*'"
+    },
+    "devDependencies": {
+        "browser-sync": "^3.0.0",
+        "concurrently": "^9.0.0"
+    }
+}

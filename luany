@@ -1,0 +1,66 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Luany CLI
+ *
+ * Usage:
+ *   php luany <command> [arguments]
+ *
+ * Available commands:
+ *   serve                    Start the built-in PHP development server
+ *   make:controller <Name>   Create a new controller
+ *   make:model      <Name>   Create a new model
+ *   make:migration  <name>   Create a new migration file
+ *   make:middleware <Name>   Create a new middleware
+ *   make:provider   <Name>   Create a new service provider
+ *   migrate                  Run all pending migrations
+ *   migrate:rollback         Rollback the last migration batch
+ *   key:generate             Generate and set APP_KEY in .env
+ */
+
+define('LUANY_CLI', true);
+define('BASE_DIR',  __DIR__);
+
+require __DIR__ . '/vendor/autoload.php';
+
+$commands = [
+    'serve'            => \LuanyCli\Commands\ServeCommand::class,
+    'make:controller'  => \LuanyCli\Commands\MakeControllerCommand::class,
+    'make:model'       => \LuanyCli\Commands\MakeModelCommand::class,
+    'make:migration'   => \LuanyCli\Commands\MakeMigrationCommand::class,
+    'make:middleware'  => \LuanyCli\Commands\MakeMiddlewareCommand::class,
+    'make:provider'    => \LuanyCli\Commands\MakeProviderCommand::class,
+    'migrate'          => \LuanyCli\Commands\MigrateCommand::class,
+    'migrate:rollback' => \LuanyCli\Commands\MigrateRollbackCommand::class,
+    'key:generate'     => \LuanyCli\Commands\KeyGenerateCommand::class,
+    'cache:clear'      => \LuanyCli\Commands\CacheClearCommand::class,
+];
+
+$command = $argv[1] ?? null;
+$args    = array_slice($argv, 2);
+
+if (!$command || $command === '--help' || $command === '-h') {
+    printHelp($commands);
+    exit(0);
+}
+
+if (!isset($commands[$command])) {
+    fwrite(STDERR, "\n  \033[31m✗\033[0m  Command [{$command}] not found.\n\n");
+    printHelp($commands);
+    exit(1);
+}
+
+$handler = new $commands[$command]();
+$handler->handle($args);
+
+function printHelp(array $commands): void
+{
+    echo "\n  \033[33mLuany CLI\033[0m — Compiler-grade PHP MVC\n\n";
+    echo "  \033[32mUsage:\033[0m   php luany <command> [arguments]\n\n";
+    echo "  \033[32mCommands:\033[0m\n";
+    foreach (array_keys($commands) as $cmd) {
+        printf("    \033[36m%-22s\033[0m\n", $cmd);
+    }
+    echo "\n";
+}

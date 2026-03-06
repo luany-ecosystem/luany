@@ -1,0 +1,206 @@
+@style
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(1, 2, 19, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+    height: 64px;
+}
+
+/* Accent line on top */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--luany-purple) 30%, var(--luany-orange) 70%, transparent 100%);
+    opacity: .7;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+}
+.navbar-logo  { height: 30px; width: auto; }
+.navbar-name  {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    letter-spacing: .08em;
+    background: var(--luany-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+}
+.navbar-link {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition: color var(--transition);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+}
+.navbar-link:hover { color: var(--luany-orange); }
+
+/* GitHub pill with icon */
+.navbar-link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--luany-purple-glass);
+    border: 1px solid var(--luany-purple-border);
+    color: var(--color-text-muted);
+    padding: .375rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+    text-decoration: none;
+}
+.navbar-link-pill svg {
+    flex-shrink: 0;
+    transition: color var(--transition);
+}
+.navbar-link-pill:hover {
+    background: var(--luany-orange-glass);
+    border-color: var(--luany-orange);
+    color: var(--luany-orange);
+}
+
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+}
+.navbar-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--luany-orange);
+    border-radius: 2px;
+    transition: all var(--transition);
+}
+.navbar-toggle.is-open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.navbar-toggle.is-open span:nth-child(2) { opacity: 0; }
+.navbar-toggle.is-open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+@media (max-width: 768px) {
+    .navbar-toggle { display: flex; }
+    .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        background: rgba(8, 11, 31, 0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--space-6);
+        gap: var(--space-4);
+        border-bottom: 1px solid var(--color-border);
+        animation: slideDown .2s var(--ease);
+    }
+    .navbar-menu.is-open { display: flex; }
+}
+@endstyle
+
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-container">
+
+        <a href="{{ url('/') }}" class="navbar-brand" aria-label="{{ env('APP_NAME', 'Luany') }} home">
+            <img src="{{ asset('images/logo/luany-logo.svg') }}" alt="" class="navbar-logo" aria-hidden="true">
+            <span class="navbar-name">{{ env('APP_NAME', 'Luany') }}</span>
+        </a>
+
+        <button class="navbar-toggle" id="navbarToggle"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+
+        <ul class="navbar-menu" id="navbarMenu" role="list">
+            <li><a href="{{ url('/') }}"    class="navbar-link">Home</a></li>
+            <li><a href="{{ url('docs') }}" class="navbar-link">Docs</a></li>
+            <li>
+                <a href="https://github.com/luany-ecosystem"
+                   class="navbar-link-pill"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Luany on GitHub">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+@script(defer)
+(function () {
+    'use strict';
+    var toggle = document.getElementById('navbarToggle');
+    var menu   = document.getElementById('navbarMenu');
+    if (!toggle || !menu) return;
+
+    function open()  {
+        menu.classList.add('is-open');
+        toggle.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+    }
+    function close() {
+        menu.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        menu.classList.contains('is-open') ? close() : open();
+    });
+
+    document.addEventListener('click', function (e) {
+        if (menu.classList.contains('is-open') && !e.target.closest('.navbar')) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('is-open')) close();
+    });
+
+    menu.querySelectorAll('a, button').forEach(function (el) {
+        el.addEventListener('click', close);
+    });
+}());
+@endscript

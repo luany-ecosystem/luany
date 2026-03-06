@@ -1,0 +1,253 @@
+@style
+.footer {
+    background: var(--luany-dark-mid);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-12) var(--space-6) var(--space-8);
+    position: relative;
+    z-index: 1;
+}
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Top grid: brand + columns */
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: var(--space-8);
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid rgba(91, 49, 113, .15);
+    margin-bottom: var(--space-6);
+}
+
+/* Brand column */
+.footer-brand { display: flex; flex-direction: column; gap: var(--space-3); }
+.footer-logo  { height: 28px; width: auto; }
+.footer-tagline {
+    font-size: var(--text-sm);
+    color: var(--color-text-faint);
+    font-family: var(--font-display);
+    letter-spacing: .03em;
+    line-height: 1.6;
+    max-width: 220px;
+}
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+}
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: var(--radius-md);
+    background: var(--luany-purple-glass);
+    border: 1px solid var(--luany-purple-border);
+    color: var(--color-text-muted);
+    transition: all var(--transition);
+}
+.footer-social-link:hover {
+    background: var(--luany-orange-glass);
+    border-color: var(--luany-orange);
+    color: var(--luany-orange);
+}
+
+/* Link columns */
+.footer-col {}
+.footer-col-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+}
+.footer-col-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    list-style: none;
+}
+.footer-col-links a {
+    font-size: var(--text-sm);
+    color: var(--color-text-faint);
+    transition: color var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+.footer-col-links a:hover { color: var(--luany-orange); }
+
+/* Package badge */
+.footer-pkg-badge {
+    font-family: var(--font-display);
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    background: var(--luany-purple-glass);
+    border: 1px solid var(--luany-purple-border);
+    color: var(--luany-purple-mid);
+    padding: .1rem .45rem;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+/* Bottom bar */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+.footer-copy {
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    font-family: var(--font-display);
+}
+.footer-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    font-family: var(--font-display);
+}
+.footer-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--luany-orange);
+    animation: pulse-glow 2s ease infinite;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+@media (max-width: 540px) {
+    .footer-top { grid-template-columns: 1fr; }
+}
+@endstyle
+
+<footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+
+        <div class="footer-top">
+
+            {{-- Brand --}}
+            <div class="footer-brand">
+                <img src="{{ asset('images/logo/luany-logo.svg') }}" alt="Luany" class="footer-logo">
+                <span class="footer-tagline">Compiler-grade PHP MVC.<br>AST templates. Explicit lifecycle.</span>
+                <div class="footer-social">
+                    <a href="https://github.com/luany-ecosystem"
+                       class="footer-social-link"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="GitHub">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://packagist.org/packages/luany/"
+                       class="footer-social-link"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Packagist">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            {{-- Ecosystem --}}
+            <div class="footer-col">
+                <p class="footer-col-title">Ecosystem</p>
+                <ul class="footer-col-links">
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany-framework"
+                           target="_blank" rel="noopener noreferrer">
+                            luany/framework
+                            <span class="footer-pkg-badge">v0.2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany-core"
+                           target="_blank" rel="noopener noreferrer">
+                            luany/core
+                            <span class="footer-pkg-badge">v0.2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany-lte"
+                           target="_blank" rel="noopener noreferrer">
+                            luany/lte
+                            <span class="footer-pkg-badge">v0.2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany-database"
+                           target="_blank" rel="noopener noreferrer">
+                            luany/database
+                            <span class="footer-pkg-badge">v0.1</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Resources --}}
+            <div class="footer-col">
+                <p class="footer-col-title">Resources</p>
+                <ul class="footer-col-links">
+                    <li><a href="{{ url('docs') }}">Documentation</a></li>
+                    <li>
+                        <a href="https://packagist.org/packages/luany/"
+                           target="_blank" rel="noopener noreferrer">Packagist</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany/blob/main/CHANGELOG.md"
+                           target="_blank" rel="noopener noreferrer">Changelog</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany/issues"
+                           target="_blank" rel="noopener noreferrer">Issues</a>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Legal --}}
+            <div class="footer-col">
+                <p class="footer-col-title">Legal</p>
+                <ul class="footer-col-links">
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany-framework/blob/main/LICENSE"
+                           target="_blank" rel="noopener noreferrer">MIT License</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/luany-ecosystem/luany/blob/main/README.md"
+                           target="_blank" rel="noopener noreferrer">README</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; {{ date('Y') }} {{ env('APP_NAME', 'Luany') }} — MIT License</p>
+            <span class="footer-badge">
+                <span class="footer-badge-dot" aria-hidden="true"></span>
+                Built with Luany Framework
+            </span>
+        </div>
+
+    </div>
+</footer>

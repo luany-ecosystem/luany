@@ -1,0 +1,31 @@
+# Dependencies
+/vendor/
+
+# Environment
+.env
+.env.local
+
+# Cache & logs
+/storage/cache/views/*
+/storage/logs/*
+!/storage/cache/views/.gitkeep
+!/storage/logs/.gitkeep
+
+# PHPUnit
+.phpunit.result.cache
+
+# Node
+/node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+/public/assets/build/

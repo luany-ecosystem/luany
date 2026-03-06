@@ -1,0 +1,13 @@
+/* ================================================================
+   Luany — Global CSS Entry Point
+   ================================================================
+   Only truly global styles live here.
+   Component CSS lives inside .lte files via @style/@endstyle.
+   LTE AssetStack deduplicates and injects them at @styles.
+
+   Error page styles (404/500) are self-contained inline CSS
+   inside each view — no dependency on this bundle.
+   ================================================================ */
+
+@import 'base.css';
+@import 'components/buttons.css';
