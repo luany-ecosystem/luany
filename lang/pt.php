@@ -8,17 +8,25 @@
  */
 return [
 
+    // Title and description for SEO
+    'seo.title'       => 'Luany',
+    'seo.description' => 'Framework PHP MVC compilada em AST',
+
     // ── Navbar ────────────────────────────────────────────────
     'nav.home'   => 'Início',
-    'nav.docs' => 'Documentação',
+    'nav.docs'   => 'Documentação',
     'nav.github' => 'GitHub',
 
+    // ── Theme ─────────────────────────────────────────────────
+    'theme.to_light' => 'Mudar para modo claro',
+    'theme.to_dark'  => 'Mudar para modo escuro',
+
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v0.2 — Motor de Templates AST · PHP 8.1+',
-    'hero.title_line1'   => 'Desenvolve rápido com',
-    'hero.title_accent'  => 'Luany',
-    'hero.subtitle'      => 'Um framework PHP MVC de nível compilador.<br>Sem regex. Pipeline determinístico. Ciclo de vida explícito.',
-    'hero.cta_primary'   => 'Começar →',
+    'hero.eyebrow'       => 'v0.2 — Stack pronta · APP_ENV=development',
+    'hero.title_line1'   => 'A sua aplicação está em',
+    'hero.title_accent'  => 'execução',
+    'hero.subtitle'      => 'Crie um controlador, defina uma rota e lance a sua primeira página de visualização.<br>Tudo está ligado — começa a construir.',
+    'hero.cta_primary'   => 'Ler a Documentação →',
     'hero.cta_secondary' => 'GitHub',
     'hero.stat_regex'    => 'regex',
     'hero.stat_tests'    => 'testes',
@@ -27,7 +35,7 @@ return [
     // ── Playground ────────────────────────────────────────────
     'playground.eyebrow'       => 'Motor de Templates LTE',
     'playground.title'         => 'Vê o compilador em acção',
-    'playground.lead'          => 'O LTE transforma templates numa AST e compila para PHP optimizado. Zero regex. Output determinístico. Sempre.',
+    'playground.lead'          => 'O LTE analisa templates numa AST e emite PHP optimizado. Zero regex. Output determinístico.',
     'playground.tab_foreach'   => '&#64;foreach',
     'playground.tab_escape'    => '&#123;&#123; &#125;&#125; vs &#123;!! !!&#125;',
     'playground.tab_compiled'  => 'PHP Compilado',
@@ -46,7 +54,7 @@ return [
     'pipeline.step1.desc' => 'Superglobais PHP capturados num objecto Request tipado e imutável. Método, URI, headers, body — tudo normalizado.',
 
     'pipeline.step2.name' => 'Pipeline de Middleware Global',
-    'pipeline.step2.desc' => 'Cada request passa pelo middleware global antes do routing. interrupção antecipada em qualquer ponto. CSRF, autenticação, rate limiting — tudo aqui.',
+    'pipeline.step2.desc' => 'Cada request passa pelo middleware global antes do routing. Interrupção antecipada em qualquer ponto. CSRF, autenticação, rate limiting — tudo aqui.',
 
     'pipeline.step3.name' => 'Route::handle()',
     'pipeline.step3.desc' => 'O Router faz correspondência do método + URI. Rotas nomeadas, grupos, rotas resource, pipeline de middleware por rota — tudo resolvido aqui.',
@@ -58,7 +66,7 @@ return [
     'pipeline.step5.desc' => 'Response tipado com código de status, headers e body. Send envia para o cliente. Kernel::terminate() executa a limpeza pós-envio.',
 
     // ── Features ──────────────────────────────────────────────
-    'features.eyebrow' => 'Porquê Luany',
+    'features.eyebrow' => 'O que está incluído',
     'features.title'   => 'Engenhado para clareza',
     'features.empty'   => 'Nenhuma funcionalidade encontrada.',
 
@@ -74,16 +82,26 @@ return [
     'features.csrf.name' => 'Protecção CSRF',
     'features.csrf.desc' => 'Verificação automática de token em cada request que altera estado. Uma directiva @csrf no formulário — pronto.',
 
-    // ── CTA ───────────────────────────────────────────────────
-    'cta.title_line1'  => 'Pronto para construir',
-    'cta.title_accent' => 'algo real?',
-    'cta.sub'          => 'Clona o skeleton, executa <code style="font-family:var(--font-display);color:var(--luany-orange)">php luany serve</code>, e estás live em menos de um minuto.',
-    'cta.docs'         => 'Ler a Documentação →',
-    'cta.github'       => 'Ver no GitHub',
-    'cta.version'      => 'luany/framework v0.2 · Licença MIT',
+    // ── Next Steps ────────────────────────────────────────────
+    'nextsteps.eyebrow'  => 'Referência CLI',
+    'nextsteps.title'    => 'O que vem a seguir?',
+    'nextsteps.lead'     => 'O teu ambiente está pronto. Corre estes comandos para criar A sua primeira feature.',
+
+    'nextsteps.cmd1'  => 'php luany make:controller Nome',
+    'nextsteps.desc1' => 'Cria um novo controller em app/Controllers/',
+    'nextsteps.cmd2'  => 'php luany make:model Nome',
+    'nextsteps.desc2' => 'Cria uma classe model em app/Models/',
+    'nextsteps.cmd3'  => 'php luany make:migration nome',
+    'nextsteps.desc3' => 'Gera um ficheiro de migração com timestamp',
+    'nextsteps.cmd4'  => 'php luany migrate',
+    'nextsteps.desc4' => 'Executa todas as migrações pendentes',
+
+    'nextsteps.docs'    => 'Ler a Documentação →',
+    'nextsteps.github'  => 'Ver no GitHub',
+    'nextsteps.version' => 'luany/framework v0.2 · Licença MIT',
 
     // ── Footer ────────────────────────────────────────────────
-    'footer.tagline'       => 'Framework PHP MVC de nível compilador.<br>Templates AST. Ciclo de vida explícito.',
+    'footer.tagline'       => 'Framework PHP MVC compilada em AST.<br>Ciclo de vida explícito. Zero regex.',
     'footer.col_ecosystem' => 'Ecossistema',
     'footer.col_resources' => 'Recursos',
     'footer.col_legal'     => 'Legal',

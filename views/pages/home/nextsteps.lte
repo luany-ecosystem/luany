@@ -1,0 +1,126 @@
+@style
+.nextsteps {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-16) var(--space-6);
+    border-top: 1px solid var(--color-border);
+    overflow: hidden;
+}
+.nextsteps-glow {
+    position: absolute;
+    width: 60vw; height: 40vw;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse, rgba(91,49,113,.15) 0%, transparent 65%);
+    pointer-events: none;
+}
+[data-theme="light"] .nextsteps-glow { background: radial-gradient(ellipse, rgba(91,49,113,.07) 0%, transparent 65%); }
+.nextsteps-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.nextsteps-header { text-align: center; margin-bottom: var(--space-12); }
+
+/* CLI table */
+.nextsteps-table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+}
+.nextsteps-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-4);
+    background: var(--luany-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-6);
+    transition: border-color var(--transition), background var(--transition-slow);
+}
+.nextsteps-row:hover { border-color: var(--luany-purple-border); }
+.nextsteps-cmd {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--luany-orange);
+    letter-spacing: .02em;
+    white-space: nowrap;
+}
+.nextsteps-desc {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    letter-spacing: .03em;
+    text-align: right;
+}
+
+/* Footer row */
+.nextsteps-footer {
+    text-align: center;
+}
+.nextsteps-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+}
+.nextsteps-version {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    letter-spacing: .05em;
+}
+
+@media (max-width: 600px) {
+    .nextsteps-row {
+        grid-template-columns: 1fr;
+    }
+    .nextsteps-desc { text-align: left; }
+}
+@endstyle
+
+<section class="nextsteps">
+    <div class="nextsteps-glow" aria-hidden="true"></div>
+    <div class="nextsteps-inner">
+
+        <div class="nextsteps-header">
+            <p class="section-eyebrow">{{ __('nextsteps.eyebrow') }}</p>
+            <h2 class="section-title">{{ __('nextsteps.title') }}</h2>
+            <p class="section-lead">{!! __('nextsteps.lead') !!}</p>
+        </div>
+
+        <div class="nextsteps-table" role="list">
+            <div class="nextsteps-row" role="listitem">
+                <code class="nextsteps-cmd">{{ __('nextsteps.cmd1') }}</code>
+                <span class="nextsteps-desc">{{ __('nextsteps.desc1') }}</span>
+            </div>
+            <div class="nextsteps-row" role="listitem">
+                <code class="nextsteps-cmd">{{ __('nextsteps.cmd2') }}</code>
+                <span class="nextsteps-desc">{{ __('nextsteps.desc2') }}</span>
+            </div>
+            <div class="nextsteps-row" role="listitem">
+                <code class="nextsteps-cmd">{{ __('nextsteps.cmd3') }}</code>
+                <span class="nextsteps-desc">{{ __('nextsteps.desc3') }}</span>
+            </div>
+            <div class="nextsteps-row" role="listitem">
+                <code class="nextsteps-cmd">{{ __('nextsteps.cmd4') }}</code>
+                <span class="nextsteps-desc">{{ __('nextsteps.desc4') }}</span>
+            </div>
+        </div>
+
+        <div class="nextsteps-footer">
+            <div class="nextsteps-actions">
+                <a href="{{ url('docs') }}" class="btn btn-primary">{!! __('nextsteps.docs') !!}</a>
+                <a href="https://github.com/luany-ecosystem" class="btn btn-ghost"
+                   target="_blank" rel="noopener noreferrer">{!! __('nextsteps.github') !!}</a>
+            </div>
+            <p class="nextsteps-version">{!! __('nextsteps.version') !!}</p>
+        </div>
+
+    </div>
+</section>

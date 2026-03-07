@@ -8,35 +8,43 @@
  */
 return [
 
+    // Title and description for SEO
+    'seo.title'       => 'Luany',
+    'seo.description' => 'AST-compiled PHP MVC Framework',
+
     // ── Navbar ────────────────────────────────────────────────
     'nav.home'   => 'Home',
     'nav.docs'   => 'Docs',
     'nav.github' => 'GitHub',
 
+    // ── Theme ─────────────────────────────────────────────────
+    'theme.to_light' => 'Switch to light mode',
+    'theme.to_dark'  => 'Switch to dark mode',
+
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v0.2 — AST Template Engine · PHP 8.1+',
-    'hero.title_line1'   => 'Build fast with',
-    'hero.title_accent'  => 'Luany',
-    'hero.subtitle'      => 'A compiler-grade PHP MVC framework.<br>No regex parsing. Deterministic pipeline. Explicit lifecycle.',
-    'hero.cta_primary'   => 'Get Started →',
+    'hero.eyebrow'       => 'v0.2 — Stack wired · APP_ENV=development',
+    'hero.title_line1'   => 'Your application is',
+    'hero.title_accent'  => 'running.',
+    'hero.subtitle'      => 'Create a controller, define a route, ship your first view page.<br>Everything is wired — start building.',
+    'hero.cta_primary'   => 'Read the Docs →',
     'hero.cta_secondary' => 'GitHub',
     'hero.stat_regex'    => 'regex',
     'hero.stat_tests'    => 'tests',
     'hero.stat_compiler' => 'compiler',
 
     // ── Playground ────────────────────────────────────────────
-    'playground.eyebrow'      => 'LTE Template Engine',
-    'playground.title'        => 'See the compiler in action',
-    'playground.lead'         => 'LTE parses templates into an AST and compiles to optimised PHP. Zero regex. Deterministic output. Every time.',
-    'playground.tab_foreach'  => '&#64;foreach',
-    'playground.tab_escape'   => '&#123;&#123; &#125;&#125; vs &#123;!! !!&#125;',
-    'playground.tab_compiled' => 'Compiled PHP',
-    'playground.lte_template' => 'LTE Template',
-    'playground.lte_source'   => 'LTE Source',
-    'playground.server_output'=> 'Server Output',
-    'playground.php_rendered' => 'PHP rendered',
-    'playground.compiled_php' => 'Compiled PHP',
-    'playground.no_users'     => 'No users found.',
+    'playground.eyebrow'       => 'LTE Template Engine',
+    'playground.title'         => 'See the compiler in action',
+    'playground.lead'          => 'LTE parses templates into an AST and emits optimised PHP. Zero regex. Deterministic output.',
+    'playground.tab_foreach'   => '&#64;foreach',
+    'playground.tab_escape'    => '&#123;&#123; &#125;&#125; vs &#123;!! !!&#125;',
+    'playground.tab_compiled'  => 'Compiled PHP',
+    'playground.lte_template'  => 'LTE Template',
+    'playground.lte_source'    => 'LTE Source',
+    'playground.server_output' => 'Server Output',
+    'playground.php_rendered'  => 'PHP rendered',
+    'playground.compiled_php'  => 'Compiled PHP',
+    'playground.no_users'      => 'No users found.',
 
     // ── Pipeline ──────────────────────────────────────────────
     'pipeline.eyebrow' => 'Request Lifecycle',
@@ -58,7 +66,7 @@ return [
     'pipeline.step5.desc' => 'Typed Response with status code, headers, and body. Send flushes to the client. Kernel::terminate() runs post-send cleanup.',
 
     // ── Features ──────────────────────────────────────────────
-    'features.eyebrow' => 'Why Luany',
+    'features.eyebrow' => "What's included",
     'features.title'   => 'Engineered for clarity',
     'features.empty'   => 'No features found.',
 
@@ -74,16 +82,26 @@ return [
     'features.csrf.name' => 'CSRF Protection',
     'features.csrf.desc' => 'Automatic token verification on every state-changing request. One @csrf directive in your form — done.',
 
-    // ── CTA ───────────────────────────────────────────────────
-    'cta.title_line1'  => 'Ready to build',
-    'cta.title_accent' => 'something real?',
-    'cta.sub'          => 'Clone the skeleton, run <code style="font-family:var(--font-display);color:var(--luany-orange)">php luany serve</code>, and you\'re live in under a minute.',
-    'cta.docs'         => 'Read the Docs →',
-    'cta.github'       => 'View on GitHub',
-    'cta.version'      => 'luany/framework v0.2 · MIT License',
+    // ── Next Steps ────────────────────────────────────────────
+    'nextsteps.eyebrow'  => 'CLI Reference',
+    'nextsteps.title'    => "What's next?",
+    'nextsteps.lead'     => 'Your environment is wired. Run these to scaffold your first feature.',
+
+    'nextsteps.cmd1'  => 'php luany make:controller Name',
+    'nextsteps.desc1' => 'Scaffold a new controller in app/Controllers/',
+    'nextsteps.cmd2'  => 'php luany make:model Name',
+    'nextsteps.desc2' => 'Create a model class in app/Models/',
+    'nextsteps.cmd3'  => 'php luany make:migration name',
+    'nextsteps.desc3' => 'Generate a timestamped migration file',
+    'nextsteps.cmd4'  => 'php luany migrate',
+    'nextsteps.desc4' => 'Run all pending database migrations',
+
+    'nextsteps.docs'    => 'Read the Docs →',
+    'nextsteps.github'  => 'View on GitHub',
+    'nextsteps.version' => 'luany/framework v0.2 · MIT License',
 
     // ── Footer ────────────────────────────────────────────────
-    'footer.tagline'       => 'Compiler-grade PHP MVC.<br>AST templates. Explicit lifecycle.',
+    'footer.tagline'       => 'AST-compiled PHP MVC Framework.<br>Explicit lifecycle. Zero regex.',
     'footer.col_ecosystem' => 'Ecosystem',
     'footer.col_resources' => 'Resources',
     'footer.col_legal'     => 'Legal',
