@@ -10,7 +10,7 @@
 
 ## What is this?
 
-This is the starting point for any Luany application. Clone it, run `php luany serve`, and you have a working MVC app with a full request lifecycle, AST template engine, CSRF protection, and a design system ready to build on.
+This is the starting point for any Luany application. Clone it, run `php luany serve`, and you have a working MVC app with a full request lifecycle, AST template engine, CSRF protection, i18n, and a design system ready to build on.
 
 It is intentionally minimal. No scaffolding. No generated code. Everything present has a purpose.
 
@@ -45,27 +45,39 @@ luany/
 ├── app/
 │   ├── Controllers/
 │   │   ├── Controller.php              # Base controller
-│   │   └── HomeController.php          # Example controller
+│   │   ├── HomeController.php          # Example controller
+│   │   └── Locale/
+│   │       └── LocaleController.php    # Locale switching — sets cookie, redirects
 │   ├── Exceptions/
 │   │   └── Handler.php                 # Custom exception handler
 │   ├── Http/
 │   │   └── Kernel.php                  # HTTP kernel — global middleware stack
 │   ├── Middleware/
-│   │   └── CsrfMiddleware.php          # CSRF token verification
+│   │   ├── CsrfMiddleware.php          # CSRF token verification
+│   │   └── LocaleMiddleware.php        # Locale detection (cookie → Accept-Language → env)
 │   ├── Models/
 │   │   └── .gitkeep
 │   ├── Providers/
-│   │   ├── AppServiceProvider.php      # App bindings and singletons
-│   │   └── DatabaseServiceProvider.php
+│   │   ├── AppServiceProvider.php      # App bindings, session, constants, helpers
+│   │   └── DatabaseServiceProvider.php # Lazy PDO singleton, Model wiring
 │   └── Support/
-│       └── helpers.php                 # Global helpers: url(), asset(), env()
+│       ├── Translator.php              # Lightweight i18n engine
+│       └── helpers.php                 # Global helpers: url(), asset(), __(), locale()
 │
 ├── bootstrap/
 │   └── app.php                         # Application bootstrap
 │
+├── config/
+│   ├── app.php                         # App name, env, locale, supported_locales
+│   └── mail.php                        # Mail transport config
+│
 ├── database/
 │   └── migrations/
 │       └── 2026_01_01_000000_create_users_table.php
+│
+├── lang/
+│   ├── en.php                          # English translations
+│   └── pt.php                          # Portuguese translations
 │
 ├── luany-cli/
 │   └── Commands/                       # CLI commands (php luany <command>)
@@ -76,7 +88,7 @@ luany/
 │   └── assets/
 │       ├── css/
 │       │   ├── app.css                 # CSS entry point (@import chain)
-│       │   ├── base.css                # Design system tokens
+│       │   ├── base.css                # Design system tokens + light mode layer
 │       │   └── components/
 │       │       └── buttons.css         # Global button styles
 │       ├── images/
@@ -96,18 +108,28 @@ luany/
 │   ├── components/
 │   │   ├── flash.lte                   # Flash message bar (auto-dismiss)
 │   │   ├── footer.lte
-│   │   └── navbar.lte
+│   │   └── navbar.lte                  # Navbar with mobile menu, locale switcher, theme toggle
 │   ├── layouts/
 │   │   └── main.lte                    # Base HTML layout
 │   └── pages/
-│       ├── home.lte
+│       ├── home/
+│       │   ├── hero.lte
+│       │   ├── playground.lte
+│       │   ├── pipeline.lte
+│       │   ├── features.lte
+│       │   └── nextsteps.lte
+│       ├── home.lte                    # Page orchestrator — @includes the sections above
 │       └── errors/
-│           ├── 404.lte                 # Self-contained — no external CSS deps
-│           └── 500.lte                 # Self-contained — no external CSS deps
+│           ├── 404.lte
+│           └── 500.lte
+│
+├── tests/
 │
 ├── .env.example
 ├── .gitignore
+├── CHANGELOG.md
 ├── composer.json
+├── LICENSE
 └── luany                               # CLI entry point
 ```
 
@@ -139,8 +161,8 @@ Templates live in `views/` with the `.lte` extension.
     <li>{{ $item }}</li>
 @endforeach
 
-@forelse($items as $item)
-    <li>{{ $item }}</li>
+@forelse($items as $i => $item)
+    <li>{{ $i + 1 }}. {{ $item }}</li>
 @empty
     <li>No items found.</li>
 @endforelse
@@ -157,22 +179,40 @@ Templates live in `views/` with the `.lte` extension.
 ```lte
 {{-- views/layouts/main.lte --}}
 <!DOCTYPE html>
-<html>
+<html lang="{{ locale() }}">
 <head>
-    @styles
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', env('APP_NAME', 'Luany'))</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @stack('head')
 </head>
 <body>
     @include('components.navbar')
-    @yield('content')
+    @include('components.flash')
+
+    <main class="main-content">
+        @yield('content')
+    </main>
+
     @include('components.footer')
+
+    @styles
+    <script src="{{ asset('js/app.js') }}"></script>
     @scripts
+    @stack('scripts')
 </body>
 </html>
 ```
 
+`@styles` and `@scripts` are placed at the end of `<body>`. Component CSS (`@style` blocks) and JS (`@script` blocks) are extracted, deduplicated by hash, and injected there — not in `<head>`. Each block renders exactly once regardless of how many times a component is included.
+
 ```lte
 {{-- views/pages/example.lte --}}
 @extends('layouts.main')
+
+@section('title', 'Example Page')
 
 @section('content')
     <h1>{{ $title }}</h1>
@@ -183,10 +223,6 @@ Templates live in `views/` with the `.lte` extension.
 @endstyle
 ```
 
-### Collocated styles and scripts
-
-`@style` / `@endstyle` and `@script(defer)` / `@endscript` blocks are extracted, deduplicated by hash, and injected at `@styles` / `@scripts` in the layout. Each block renders exactly once no matter how many times a component is included.
-
 ---
 
 ## Routing
@@ -195,18 +231,18 @@ Templates live in `views/` with the `.lte` extension.
 // routes/http.php
 use Luany\Core\Routing\Route;
 
-Route::get('/',           [HomeController::class, 'index']);
-Route::get('/posts',      [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
-Route::post('/posts',     [PostController::class, 'store']);
-Route::put('/posts/{id}', [PostController::class, 'update']);
+Route::get('/',              [HomeController::class, 'index']);
+Route::get('/posts',         [PostController::class, 'index']);
+Route::get('/posts/{id}',    [PostController::class, 'show']);
+Route::post('/posts',        [PostController::class, 'store']);
+Route::put('/posts/{id}',    [PostController::class, 'update']);
 Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 
-// Named routes — use url('route.name') in views
+// Named routes
 Route::get('/about', [PageController::class, 'about'])->name('about');
 
 // Groups with shared middleware
-Route::group(['middleware' => [CsrfMiddleware::class]], function () {
+Route::group(['middleware' => [AuthMiddleware::class]], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
 ```
@@ -240,12 +276,13 @@ namespace App\Middleware;
 
 use Luany\Core\Http\Request;
 use Luany\Core\Http\Response;
+use Luany\Core\Middleware\MiddlewareInterface;
 
-class AuthMiddleware
+class AuthMiddleware implements MiddlewareInterface
 {
-    public function handle(Request $request, \Closure $next): Response
+    public function handle(Request $request, callable $next): Response
     {
-        if (!session('user_id')) {
+        if (!is_authenticated()) {
             return Response::make('', 302, ['Location' => '/login']);
         }
 
@@ -291,26 +328,52 @@ Customise `app/Exceptions/Handler.php` to control error responses:
 ```php
 namespace App\Exceptions;
 
-use Luany\Framework\Exceptions\Handler as BaseHandler;
-use Luany\Core\Http\Request;
 use Luany\Core\Http\Response;
+use Luany\Framework\Exceptions\Handler as BaseHandler;
 
 class Handler extends BaseHandler
 {
-    public function render(Request $request, \Throwable $e): Response
+    public function render(\Throwable $e): Response
     {
         if ($e instanceof ModelNotFoundException) {
             return Response::make(view('pages.errors.404'), 404);
         }
 
-        return parent::render($request, $e);
+        return parent::render($e);
     }
 }
 ```
 
-The `404.lte` and `500.lte` error pages are **self-contained** — they have inline CSS and zero dependency on `app.css` or any external assets. They render correctly even if the asset pipeline is broken or an exception occurs during boot.
-
 With `APP_DEBUG=true`, a full-screen debug page shows the exception class, file, line, request info, and stack trace. In production (`APP_DEBUG=false`), the `500.lte` view is served instead.
+
+---
+
+## Internationalisation
+
+Translation files live in `lang/{locale}.php` and return a flat associative array.
+
+```php
+// lang/en.php
+return [
+    'nav.home'       => 'Home',
+    'welcome.title'  => 'Hello, :name',
+];
+```
+
+Use the `__()` helper in any view or controller:
+
+```lte
+{{ __('nav.home') }}
+{{ __('welcome.title', ['name' => $user['name']]) }}
+```
+
+Active locale is detected in this order: `app_locale` cookie → `Accept-Language` header → `APP_LOCALE` env → `en`.
+
+Add a language:
+
+1. Create `lang/{code}.php`
+2. Add the code to `supported_locales` in `config/app.php`
+3. Add a button in `views/components/navbar.lte`
 
 ---
 
@@ -341,11 +404,13 @@ Copy `.env.example` to `.env`:
 
 ```ini
 APP_NAME=Luany
-APP_ENV=local
+APP_ENV=development
 APP_DEBUG=true
 APP_KEY=
 APP_URL=http://localhost:8000
 APP_LOCALE=en
+APP_TIMEZONE=UTC
+APP_HTTPS=false
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -359,7 +424,7 @@ DB_PASS=
 
 ## Design system
 
-The skeleton ships with a dark design system built on CSS custom properties. All tokens are in `public/assets/css/base.css`.
+The skeleton ships with a dark/light design system built on CSS custom properties. All tokens are in `public/assets/css/base.css`. Light mode is activated via `[data-theme="light"]` on `<html>` and persisted in `localStorage`.
 
 Core palette:
 
@@ -367,7 +432,7 @@ Core palette:
 |-------|-------|------|
 | `--luany-purple` | `#5B3171` | Brand primary |
 | `--luany-orange` | `#E6874A` | Brand accent |
-| `--luany-dark` | `#010213` | Background |
+| `--luany-dark` | `#010213` | Background (dark) |
 | `--luany-vibrant` | `#F2441D` | Danger / error |
 
 The design system is **optional** — replace or remove it entirely. The framework has no opinion on CSS.
