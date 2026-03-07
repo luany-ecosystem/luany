@@ -5,6 +5,7 @@ namespace App\Providers;
 use Luany\Framework\Application;
 use Luany\Framework\ServiceProvider;
 use Luany\Framework\Support\Env;
+use App\Support\Translator;
 
 /**
  * AppServiceProvider
@@ -19,7 +20,17 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(Application $app): void
     {
-        // Nothing to bind yet — extend as needed
+        // Translator — singleton, resolved once per request lifecycle
+        $app->singleton('translator', function () use ($app) {
+            $config = require $app->basePath('config/app.php');
+
+            return new Translator(
+                langPath:  $app->basePath('lang'),
+                locale:    $config['locale'],
+                fallback:  $config['fallback_locale'],
+                supported: $config['supported_locales'],
+            );
+        });
     }
 
     public function boot(Application $app): void

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Luany\Framework\Http\Kernel as BaseKernel;
+use App\Middleware\LocaleMiddleware;
 use App\Middleware\CsrfMiddleware;
 
 /**
@@ -17,6 +18,7 @@ class Kernel extends BaseKernel
      * Global middleware — applied to every request.
      */
     protected array $middleware = [
+        LocaleMiddleware::class,  // locale detection — before everything
         CsrfMiddleware::class,
     ];
 

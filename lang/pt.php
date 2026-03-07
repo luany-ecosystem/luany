@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * Traduções em Português
+ *
+ * Chaves em notação de grupo: 'secção.elemento'
+ * Substituições com :placeholder: 'Olá, :name'
+ */
+return [
+
+    // ── Navbar ────────────────────────────────────────────────
+    'nav.home'   => 'Início',
+    'nav.docs' => 'Documentação',
+    'nav.github' => 'GitHub',
+
+    // ── Hero ──────────────────────────────────────────────────
+    'hero.eyebrow'       => 'v0.2 — Motor de Templates AST · PHP 8.1+',
+    'hero.title_line1'   => 'Desenvolve rápido com',
+    'hero.title_accent'  => 'Luany',
+    'hero.subtitle'      => 'Um framework PHP MVC de nível compilador.<br>Sem regex. Pipeline determinístico. Ciclo de vida explícito.',
+    'hero.cta_primary'   => 'Começar →',
+    'hero.cta_secondary' => 'GitHub',
+    'hero.stat_regex'    => 'regex',
+    'hero.stat_tests'    => 'testes',
+    'hero.stat_compiler' => 'compilador',
+
+    // ── Playground ────────────────────────────────────────────
+    'playground.eyebrow'       => 'Motor de Templates LTE',
+    'playground.title'         => 'Vê o compilador em acção',
+    'playground.lead'          => 'O LTE transforma templates numa AST e compila para PHP optimizado. Zero regex. Output determinístico. Sempre.',
+    'playground.tab_foreach'   => '&#64;foreach',
+    'playground.tab_escape'    => '&#123;&#123; &#125;&#125; vs &#123;!! !!&#125;',
+    'playground.tab_compiled'  => 'PHP Compilado',
+    'playground.lte_template'  => 'Template LTE',
+    'playground.lte_source'    => 'Fonte LTE',
+    'playground.server_output' => 'Saída do Servidor',
+    'playground.php_rendered'  => 'renderizado em PHP',
+    'playground.compiled_php'  => 'PHP Compilado',
+    'playground.no_users'      => 'Nenhum utilizador encontrado.',
+
+    // ── Pipeline ──────────────────────────────────────────────
+    'pipeline.eyebrow' => 'Ciclo de Vida do Request',
+    'pipeline.title'   => 'Explícito por design',
+
+    'pipeline.step1.name' => 'Request::fromGlobals()',
+    'pipeline.step1.desc' => 'Superglobais PHP capturados num objecto Request tipado e imutável. Método, URI, headers, body — tudo normalizado.',
+
+    'pipeline.step2.name' => 'Pipeline de Middleware Global',
+    'pipeline.step2.desc' => 'Cada request passa pelo middleware global antes do routing. interrupção antecipada em qualquer ponto. CSRF, autenticação, rate limiting — tudo aqui.',
+
+    'pipeline.step3.name' => 'Route::handle()',
+    'pipeline.step3.desc' => 'O Router faz correspondência do método + URI. Rotas nomeadas, grupos, rotas resource, pipeline de middleware por rota — tudo resolvido aqui.',
+
+    'pipeline.step4.name' => 'Controller → Motor LTE',
+    'pipeline.step4.desc' => 'O Controller retorna um valor. O LTE compila a view via AST, faz cache do PHP compilado. Auto-reload em debug, cache persistente em produção.',
+
+    'pipeline.step5.name' => 'Response::send()',
+    'pipeline.step5.desc' => 'Response tipado com código de status, headers e body. Send envia para o cliente. Kernel::terminate() executa a limpeza pós-envio.',
+
+    // ── Features ──────────────────────────────────────────────
+    'features.eyebrow' => 'Porquê Luany',
+    'features.title'   => 'Engenhado para clareza',
+    'features.empty'   => 'Nenhuma funcionalidade encontrada.',
+
+    'features.ast.name' => 'Motor de Templates AST',
+    'features.ast.desc' => 'O LTE compila via AST — zero regex, output previsível, CSS e JS colocalizados com blocos @style e @script.',
+
+    'features.pipeline.name' => 'Pipeline de Middleware',
+    'features.pipeline.desc' => 'Ciclo de vida do request explícito. Middleware global e por rota com suporte total a interrupção antecipada. Sem magia.',
+
+    'features.providers.name' => 'Service Providers',
+    'features.providers.desc' => 'Ciclo de boot em duas fases. Todos os register() completam antes de qualquer boot() — dependências entre provedores sempre seguras.',
+
+    'features.csrf.name' => 'Protecção CSRF',
+    'features.csrf.desc' => 'Verificação automática de token em cada request que altera estado. Uma directiva @csrf no formulário — pronto.',
+
+    // ── CTA ───────────────────────────────────────────────────
+    'cta.title_line1'  => 'Pronto para construir',
+    'cta.title_accent' => 'algo real?',
+    'cta.sub'          => 'Clona o skeleton, executa <code style="font-family:var(--font-display);color:var(--luany-orange)">php luany serve</code>, e estás live em menos de um minuto.',
+    'cta.docs'         => 'Ler a Documentação →',
+    'cta.github'       => 'Ver no GitHub',
+    'cta.version'      => 'luany/framework v0.2 · Licença MIT',
+
+    // ── Footer ────────────────────────────────────────────────
+    'footer.tagline'       => 'Framework PHP MVC de nível compilador.<br>Templates AST. Ciclo de vida explícito.',
+    'footer.col_ecosystem' => 'Ecossistema',
+    'footer.col_resources' => 'Recursos',
+    'footer.col_legal'     => 'Legal',
+    'footer.docs'          => 'Documentação',
+    'footer.packagist'     => 'Packagist',
+    'footer.changelog'     => 'Changelog',
+    'footer.issues'        => 'Issues',
+    'footer.license'       => 'Licença MIT',
+    'footer.readme'        => 'README',
+    'footer.built_with'    => 'Feito com Luany Framework',
+    'footer.copyright'     => '© :year :name — Licença MIT',
+
+    // ── Error 404 ─────────────────────────────────────────────
+    '404.eyebrow'     => '404 — Página Não Encontrada',
+    '404.description' => 'A página que procuras não existe<br>ou foi movida permanentemente.',
+    '404.back_home'   => '← Voltar ao Início',
+    '404.previous'    => 'Página anterior',
+    '404.meta_label'  => 'URI do Request',
+
+    // ── Error 500 ─────────────────────────────────────────────
+    '500.eyebrow'     => '500 — Erro Interno do Servidor',
+    '500.description' => 'Algo correu mal do nosso lado.<br>Fomos notificados e estamos a trabalhar para resolver.',
+    '500.back_home'   => '← Voltar ao Início',
+    '500.try_again'   => 'Tentar novamente',
+
+];
