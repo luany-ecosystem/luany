@@ -9,8 +9,6 @@
     border-bottom: 1px solid var(--color-border);
     height: 64px;
 }
-
-/* Accent line on top */
 .navbar::before {
     content: '';
     position: absolute;
@@ -19,7 +17,6 @@
     background: linear-gradient(90deg, transparent 0%, var(--luany-purple) 30%, var(--luany-orange) 70%, transparent 100%);
     opacity: .7;
 }
-
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -36,8 +33,8 @@
     gap: var(--space-3);
     text-decoration: none;
 }
-.navbar-logo  { height: 30px; width: auto; }
-.navbar-name  {
+.navbar-logo { height: 30px; width: auto; }
+.navbar-name {
     font-family: var(--font-display);
     font-size: var(--text-lg);
     font-weight: 800;
@@ -66,8 +63,6 @@
     padding: 0;
 }
 .navbar-link:hover { color: var(--luany-orange); }
-
-/* GitHub pill with icon */
 .navbar-link-pill {
     display: inline-flex;
     align-items: center;
@@ -83,16 +78,48 @@
     font-family: inherit;
     text-decoration: none;
 }
-.navbar-link-pill svg {
-    flex-shrink: 0;
-    transition: color var(--transition);
-}
+.navbar-link-pill svg { flex-shrink: 0; }
 .navbar-link-pill:hover {
     background: var(--luany-orange-glass);
     border-color: var(--luany-orange);
     color: var(--luany-orange);
 }
 
+/* ── Locale switcher ─────────────────────────────────────── */
+.navbar-locale {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    background: var(--luany-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 2px;
+}
+.navbar-locale-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; height: 22px;
+    border-radius: calc(var(--radius-full) - 2px);
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text-faint);
+    transition: all var(--transition);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+}
+.navbar-locale-btn:hover { color: var(--color-text); }
+.navbar-locale-btn.is-active {
+    background: var(--luany-purple-glass);
+    border: 1px solid var(--luany-purple-border);
+    color: var(--luany-orange);
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
 .navbar-toggle {
     display: none;
     flex-direction: column;
@@ -104,8 +131,7 @@
 }
 .navbar-toggle span {
     display: block;
-    width: 22px;
-    height: 1.5px;
+    width: 22px; height: 1.5px;
     background: var(--luany-orange);
     border-radius: 2px;
     transition: all var(--transition);
@@ -149,8 +175,8 @@
         </button>
 
         <ul class="navbar-menu" id="navbarMenu" role="list">
-            <li><a href="{{ url('/') }}"    class="navbar-link">Home</a></li>
-            <li><a href="{{ url('docs') }}" class="navbar-link">Docs</a></li>
+            <li><a href="{{ url('/') }}"    class="navbar-link">{{ __('nav.home') }}</a></li>
+            <li><a href="{{ url('docs') }}" class="navbar-link">{{ __('nav.docs') }}</a></li>
             <li>
                 <a href="https://github.com/luany-ecosystem"
                    class="navbar-link-pill"
@@ -160,8 +186,20 @@
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
                     </svg>
-                    GitHub
+                    {{ __('nav.github') }}
                 </a>
+            </li>
+            <li>
+                <div class="navbar-locale" role="group" aria-label="Language selector">
+                    <a href="{{ url('locale/en') }}"
+                       class="navbar-locale-btn{{ locale() === 'en' ? ' is-active' : '' }}"
+                       aria-label="Switch to English"
+                       aria-pressed="{{ locale() === 'en' ? 'true' : 'false' }}">EN</a>
+                    <a href="{{ url('locale/pt') }}"
+                       class="navbar-locale-btn{{ locale() === 'pt' ? ' is-active' : '' }}"
+                       aria-label="Mudar para Português"
+                       aria-pressed="{{ locale() === 'pt' ? 'true' : 'false' }}">PT</a>
+                </div>
             </li>
         </ul>
 
@@ -199,7 +237,7 @@
         if (e.key === 'Escape' && menu.classList.contains('is-open')) close();
     });
 
-    menu.querySelectorAll('a, button').forEach(function (el) {
+    menu.querySelectorAll('a[href]:not(.navbar-locale-btn), button').forEach(function (el) {
         el.addEventListener('click', close);
     });
 }());

@@ -62,6 +62,10 @@
     z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     animation: fadeInUp .6s var(--ease) both;
 }
 
@@ -115,7 +119,7 @@
     color: var(--color-text-muted);
     line-height: 1.8;
     max-width: 520px;
-    margin: 0 auto var(--space-10);
+    margin: 0 auto var(--space-8);
 }
 
 .hero-actions {
@@ -636,34 +640,33 @@
 
         <span class="hero-eyebrow">
             <span class="hero-eyebrow-dot" aria-hidden="true"></span>
-            v0.2 — AST Template Engine · PHP 8.1+
+            {!! __('hero.eyebrow') !!}
         </span>
 
         <h1 class="hero-title">
-            Build fast with<br>
-            <span class="hero-title-accent">Luany</span>
+            {!! __('hero.title_line1') !!}<br>
+            <span class="hero-title-accent">{{ __("hero.title_accent") }}</span>
         </h1>
 
         <p class="hero-subtitle">
-            A compiler-grade PHP MVC framework.<br>
-            No regex parsing. Deterministic pipeline. Explicit lifecycle.
+            {!! __('hero.subtitle') !!}
         </p>
 
         <div class="hero-actions">
-            <a href="{{ url('docs') }}" class="btn btn-primary btn-lg">Get Started →</a>
+            <a href="{{ url('docs') }}" class="btn btn-primary btn-lg">{!! __('hero.cta_primary') !!}</a>
             <a href="https://github.com/luany-ecosystem" class="btn btn-secondary btn-lg"
-               target="_blank" rel="noopener noreferrer">GitHub</a>
+               target="_blank" rel="noopener noreferrer">{{ __("hero.cta_secondary") }}</a>
         </div>
 
         <div class="hero-stats" aria-label="Framework metrics">
             <div class="hero-stat">
-                <span class="hero-stat-val">0</span> regex
+                <span class="hero-stat-val">0</span> {{ __("hero.stat_regex") }}
             </div>
             <div class="hero-stat">
-                <span class="hero-stat-val">63</span> tests
+                <span class="hero-stat-val">63</span> {{ __("hero.stat_tests") }}
             </div>
             <div class="hero-stat">
-                <span class="hero-stat-val">AST</span> compiler
+                <span class="hero-stat-val">AST</span> {{ __("hero.stat_compiler") }}
             </div>
             <div class="hero-stat">
                 <span class="hero-stat-val">PHP</span> 8.1+
@@ -678,11 +681,10 @@
     <div class="playground-inner">
 
         <div class="playground-header">
-            <p class="section-eyebrow">LTE Template Engine</p>
-            <h2 class="section-title">See the compiler in action</h2>
+            <p class="section-eyebrow">{{ __("playground.eyebrow") }}</p>
+            <h2 class="section-title">{{ __("playground.title") }}</h2>
             <p class="section-lead">
-                LTE parses templates into an AST and compiles to optimised PHP.
-                Zero regex. Deterministic output. Every time.
+                {!! __('playground.lead') !!}
             </p>
         </div>
 
@@ -690,15 +692,15 @@
         <div class="pg-tabs" role="tablist" aria-label="Playground examples">
             <button class="pg-tab is-active" role="tab" aria-selected="true"
                     aria-controls="pg-foreach" data-tab="foreach">
-                &#64;foreach
+                {!! __("playground.tab_foreach") !!}
             </button>
             <button class="pg-tab" role="tab" aria-selected="false"
                     aria-controls="pg-escape" data-tab="escape">
-                &#123;&#123; &#125;&#125; vs &#123;!! !!&#125;
+                {!! __("playground.tab_escape") !!}
             </button>
             <button class="pg-tab" role="tab" aria-selected="false"
                     aria-controls="pg-compiled" data-tab="compiled">
-                Compiled PHP
+                {!! __("playground.tab_compiled") !!}
             </button>
         </div>
 
@@ -706,7 +708,7 @@
         <div class="pg-panels pg-panel is-visible" id="pg-foreach" role="tabpanel">
             <div class="pg-code">
                 <div class="pg-code-header">
-                    <span class="pg-code-label">LTE Template</span>
+                    <span class="pg-code-label">{{ __("playground.lte_template") }}</span>
                     <span class="pg-code-lang">home.lte</span>
                 </div>
                 <pre><span class="tok-tag">&lt;ul&gt;</span>
@@ -720,8 +722,8 @@
             <div class="pg-output">
                 <div class="pg-output-header">
                     <span class="pg-output-dot" aria-hidden="true"></span>
-                    <span class="pg-output-label">Server Output</span>
-                    <span class="pg-output-badge">PHP rendered</span>
+                    <span class="pg-output-label">{{ __("playground.server_output") }}</span>
+                    <span class="pg-output-badge">{{ __("playground.php_rendered") }}</span>
                 </div>
                 <div class="pg-output-body">
                     <ul class="pg-user-list" aria-label="Rendered user list">
@@ -731,7 +733,7 @@
                                 {{ $user['name'] }}
                             </li>
                         @empty
-                            <li class="pg-user-item" style="color:var(--color-text-faint)">No users found.</li>
+                            <li class="pg-user-item" style="color:var(--color-text-faint)">{!! __("playground.no_users") !!}</li>
                         @endforelse
                     </ul>
                 </div>
@@ -742,7 +744,7 @@
         <div class="pg-panels pg-panel" id="pg-escape" role="tabpanel">
             <div class="pg-code">
                 <div class="pg-code-header">
-                    <span class="pg-code-label">LTE Template</span>
+                    <span class="pg-code-label">{{ __("playground.lte_template") }}</span>
                     <span class="pg-code-lang">escaping.lte</span>
                 </div>
                 <pre><span class="tok-comment">&#123;&#123;-- Escaped (safe) --&#125;&#125;</span>
@@ -783,7 +785,7 @@
         <div class="pg-panels pg-panel" id="pg-compiled" role="tabpanel">
             <div class="pg-code">
                 <div class="pg-code-header">
-                    <span class="pg-code-label">LTE Source</span>
+                    <span class="pg-code-label">{{ __("playground.lte_source") }}</span>
                     <span class="pg-code-lang">template.lte</span>
                 </div>
                 <pre><span class="tok-directive">&#64;foreach</span><span class="tok-punct">(</span><span class="tok-expr">$users as $user</span><span class="tok-punct">)</span>
@@ -792,7 +794,7 @@
             </div>
             <div class="pg-code" style="background:var(--luany-dark-card);border-right:none;">
                 <div class="pg-code-header">
-                    <span class="pg-code-label">Compiled PHP</span>
+                    <span class="pg-code-label">{{ __("playground.compiled_php") }}</span>
                     <span class="pg-code-lang">storage/cache/views/*.php</span>
                 </div>
                 <pre><span class="tok-php">&lt;?php</span> <span class="tok-directive">foreach</span><span class="tok-punct">(</span><span class="tok-expr">$users as $user</span><span class="tok-punct">):</span> <span class="tok-php">?&gt;</span>
@@ -814,8 +816,8 @@
     <div class="pipeline-inner">
 
         <div class="pipeline-header">
-            <p class="section-eyebrow">Request Lifecycle</p>
-            <h2 class="section-title">Explicit by design</h2>
+            <p class="section-eyebrow">{{ __("pipeline.eyebrow") }}</p>
+            <h2 class="section-title">{{ __("pipeline.title") }}</h2>
         </div>
 
         <div class="pipeline-flow" role="list">
@@ -830,8 +832,8 @@
                     </div>
                 </div>
                 <div class="pipe-body">
-                    <p class="pipe-name">Request::fromGlobals()</p>
-                    <p class="pipe-desc">PHP superglobals captured into a typed, immutable Request object. Method, URI, headers, body — all normalised.</p>
+                    <p class="pipe-name">{{ __("pipeline.step1.name") }}</p>
+                    <p class="pipe-desc">{{ __("pipeline.step1.desc") }}</p>
                     <span class="pipe-code">luany/core</span>
                 </div>
             </div>
@@ -845,8 +847,8 @@
                     </div>
                 </div>
                 <div class="pipe-body">
-                    <p class="pipe-name">Global Middleware Pipeline</p>
-                    <p class="pipe-desc">Every request passes through global middleware before routing. Short-circuit at any point. CSRF, auth, rate limiting — all here.</p>
+                    <p class="pipe-name">{{ __("pipeline.step2.name") }}</p>
+                    <p class="pipe-desc">{{ __("pipeline.step2.desc") }}</p>
                     <span class="pipe-code">Kernel::$middleware</span>
                 </div>
             </div>
@@ -861,8 +863,8 @@
                     </div>
                 </div>
                 <div class="pipe-body">
-                    <p class="pipe-name">Route::handle()</p>
-                    <p class="pipe-desc">Router matches method + URI. Named routes, route groups, resource routes, per-route middleware pipeline — all resolved here.</p>
+                    <p class="pipe-name">{{ __("pipeline.step3.name") }}</p>
+                    <p class="pipe-desc">{{ __("pipeline.step3.desc") }}</p>
                     <span class="pipe-code">luany/core · Router</span>
                 </div>
             </div>
@@ -876,8 +878,8 @@
                     </div>
                 </div>
                 <div class="pipe-body">
-                    <p class="pipe-name">Controller → LTE Engine</p>
-                    <p class="pipe-desc">Controller returns a value. LTE compiles the view via AST, caches compiled PHP. Auto-reload in debug mode, persistent cache in production.</p>
+                    <p class="pipe-name">{{ __("pipeline.step4.name") }}</p>
+                    <p class="pipe-desc">{{ __("pipeline.step4.desc") }}</p>
                     <span class="pipe-code">luany/lte · Engine</span>
                 </div>
             </div>
@@ -893,8 +895,8 @@
                     </div>
                 </div>
                 <div class="pipe-body">
-                    <p class="pipe-name">Response::send()</p>
-                    <p class="pipe-desc">Typed Response with status code, headers, and body. Send flushes to the client. Kernel::terminate() runs post-send cleanup.</p>
+                    <p class="pipe-name">{{ __("pipeline.step5.name") }}</p>
+                    <p class="pipe-desc">{{ __("pipeline.step5.desc") }}</p>
                     <span class="pipe-code">luany/core · Response</span>
                 </div>
             </div>
@@ -908,31 +910,31 @@
     <div class="features-inner">
 
         <div class="features-header">
-            <p class="section-eyebrow">Why Luany</p>
-            <h2 class="section-title">Engineered for clarity</h2>
+            <p class="section-eyebrow">{{ __("features.eyebrow") }}</p>
+            <h2 class="section-title">{{ __("features.title") }}</h2>
         </div>
 
         @php
             $features = [
                 [
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
-                    'name' => 'AST Template Engine',
-                    'desc' => 'LTE compiles via AST — zero regex, predictable output, collocated CSS and JS with @style and @script blocks.',
+                    'name' => __('features.ast.name'),
+                    'desc' => __('features.ast.desc'),
                 ],
                 [
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
-                    'name' => 'Middleware Pipeline',
-                    'desc' => 'Explicit request lifecycle. Global and per-route middleware with full short-circuit support. No magic.',
+                    'name' => __('features.pipeline.name'),
+                    'desc' => __('features.pipeline.desc'),
                 ],
                 [
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="8" height="8" rx="1"/><rect x="14" y="3" width="8" height="8" rx="1"/><rect x="2" y="13" width="8" height="8" rx="1"/><rect x="14" y="13" width="8" height="8" rx="1"/></svg>',
-                    'name' => 'Service Providers',
-                    'desc' => 'Two-phase boot lifecycle. All register() calls complete before any boot() runs — cross-provider dependencies always safe.',
+                    'name' => __('features.providers.name'),
+                    'desc' => __('features.providers.desc'),
                 ],
                 [
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-                    'name' => 'CSRF Protection',
-                    'desc' => 'Automatic token verification on every state-changing request. One @csrf directive in your form — done.',
+                    'name' => __('features.csrf.name'),
+                    'desc' => __('features.csrf.desc'),
                 ],
             ]
         @endphp
@@ -945,7 +947,7 @@
                     <p class="feature-desc">{{ $feature['desc'] }}</p>
                 </div>
             @empty
-                <p style="color:var(--color-text-muted)">No features found.</p>
+                <p style="color:var(--color-text-muted)">{{ __("features.empty") }}</p>
             @endforelse
         </div>
 
@@ -957,18 +959,18 @@
     <div class="cta-glow" aria-hidden="true"></div>
     <div class="cta-inner">
         <h2 class="cta-title">
-            Ready to build<br>
-            <span>something real?</span>
+            {!! __('cta.title_line1') !!}<br>
+            <span>{!! __("cta.title_accent") !!}</span>
         </h2>
         <p class="cta-sub">
-            Clone the skeleton, run <code style="font-family:var(--font-display);color:var(--luany-orange)">php luany serve</code>, and you're live in under a minute.
+            {!! __('cta.sub') !!}
         </p>
         <div class="cta-actions">
-            <a href="{{ url('docs') }}" class="btn btn-primary">Read the Docs →</a>
+            <a href="{{ url('docs') }}" class="btn btn-primary">{!! __("cta.docs") !!}</a>
             <a href="https://github.com/luany-ecosystem" class="btn btn-ghost"
-               target="_blank" rel="noopener noreferrer">View on GitHub</a>
+               target="_blank" rel="noopener noreferrer">{!! __("cta.github") !!}</a>
         </div>
-        <p class="cta-version">luany/framework v0.2 · MIT License</p>
+        <p class="cta-version">{!! __("cta.version") !!}</p>
     </div>
 </section>
 
