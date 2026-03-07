@@ -1,6 +1,6 @@
 @style
 .footer {
-    background: var(--luany-dark-mid);
+    background: var(--luany-dark-elevated);
     border-top: 1px solid var(--color-border);
     padding: var(--space-12) var(--space-6) var(--space-8);
     position: relative;
@@ -16,10 +16,32 @@
     margin-bottom: var(--space-6);
 }
 .footer-brand { display: flex; flex-direction: column; gap: var(--space-3); }
-.footer-logo  { height: 28px; width: auto; }
+
+
+
+.footer-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+}
+.footer-logo { height: 30px; width: auto; }
+.footer-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    letter-spacing: .08em;
+    background: var(--luany-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+
 .footer-tagline {
     font-size: var(--text-sm);
-    color: var(--color-text-faint);
+    color: var(--color-text-muted);
     font-family: var(--font-display);
     letter-spacing: .03em;
     line-height: 1.6;
@@ -54,7 +76,7 @@
 .footer-col-links { display: flex; flex-direction: column; gap: var(--space-3); list-style: none; }
 .footer-col-links a {
     font-size: var(--text-sm);
-    color: var(--color-text-faint);
+    color: var(--color-text-muted);
     transition: color var(--transition);
     display: flex;
     align-items: center;
@@ -80,8 +102,8 @@
     flex-wrap: wrap;
     gap: var(--space-4);
 }
-.footer-copy { font-size: var(--text-xs); color: var(--color-text-faint); font-family: var(--font-display); }
-.footer-badge { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-faint); font-family: var(--font-display); }
+.footer-copy { font-size: var(--text-xs); color: var(--color-text-muted); font-family: var(--font-display); }
+.footer-badge { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted); font-family: var(--font-display); }
 .footer-badge-dot {
     width: 6px; height: 6px;
     border-radius: var(--radius-full);
@@ -100,7 +122,10 @@
         <div class="footer-top">
 
             <div class="footer-brand">
-                <img src="{{ asset('images/logo/luany-logo.svg') }}" alt="Luany" class="footer-logo">
+                <a href="{{ url('/') }}" class="footer-brand-logo" aria-label="{{ env('APP_NAME', 'Luany') }} home">
+                    <img src="{{ asset('images/logo/luany-logo.svg') }}" alt="" class="footer-logo" aria-hidden="true">
+                    <span class="footer-name">{{ env('APP_NAME', 'Luany') }}</span>
+                </a>
                 <span class="footer-tagline">{!! __('footer.tagline') !!}</span>
                 <div class="footer-social">
                     <a href="https://github.com/luany-ecosystem" class="footer-social-link"

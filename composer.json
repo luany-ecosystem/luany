@@ -1,6 +1,6 @@
 {
     "name": "luany/luany",
-    "description": "The official Luany application skeleton. Compiler-grade PHP MVC powered by LTE — an AST-based template engine built for simplicity and expressive development.",
+    "description": "Official application skeleton for the Luany Framework — AST-compiled PHP MVC with an explicit request lifecycle and zero-regex template engine.",
     "type": "project",
     "license": "MIT",
     "authors": [
