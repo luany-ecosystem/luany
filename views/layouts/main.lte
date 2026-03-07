@@ -7,6 +7,7 @@
     <title>@yield('title', env('APP_NAME', 'Luany'))</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/icon/luany.svg') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script>/* anti-FOUC */(function(){var t=localStorage.getItem('luany-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());</script>
     @stack('head')
 </head>
 <body>

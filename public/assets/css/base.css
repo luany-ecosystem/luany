@@ -33,14 +33,14 @@
 
     --luany-gradient: linear-gradient(135deg, #5B3171 0%, #E6874A 100%);
 
-    /* ── Semantic ─────────────────────────────────────────── */
-    --color-bg:            var(--luany-dark);
-    --color-bg-card:       var(--luany-dark-card);
-    --color-bg-elevated:   var(--luany-dark-elevated);
+    /* ── Semantic — dark (default) ────────────────────────── */
+    --color-bg:          var(--luany-dark);
+    --color-bg-card:     var(--luany-dark-card);
+    --color-bg-elevated: var(--luany-dark-elevated);
 
-    --color-text:          rgba(255, 255, 255, 0.95);
-    --color-text-muted:    rgba(255, 255, 255, 0.55);
-    --color-text-faint:    rgba(255, 255, 255, 0.25);
+    --color-text:       rgba(255, 255, 255, 0.95);
+    --color-text-muted: rgba(255, 255, 255, 0.55);
+    --color-text-faint: rgba(255, 255, 255, 0.25);
 
     --color-border:        rgba(91, 49, 113, 0.25);
     --color-border-bright: rgba(230, 135, 74, 0.4);
@@ -83,6 +83,38 @@
     --transition-slow: .4s var(--ease);
 }
 
+/* ── Light mode — token overrides ────────────────────────────
+   Activated by: document.documentElement.setAttribute('data-theme','light')
+   Persisted in: localStorage key 'luany-theme'
+   ──────────────────────────────────────────────────────────── */
+
+[data-theme="light"] {
+    --luany-dark:          #F4F0FF;
+    --luany-dark-mid:      #EDE7FF;
+    --luany-dark-card:     #FFFFFF;
+    --luany-dark-elevated: #F8F5FF;
+
+    --color-bg:          #F4F0FF;
+    --color-bg-card:     #FFFFFF;
+    --color-bg-elevated: #F8F5FF;
+
+    --color-text:       rgba(18, 8, 28, 0.92);
+    --color-text-muted: rgba(18, 8, 28, 0.55);
+    --color-text-faint: rgba(18, 8, 28, 0.30);
+
+    --color-border:        rgba(91, 49, 113, 0.18);
+    --color-border-bright: rgba(230, 135, 74, 0.50);
+
+    --luany-purple-glass:  rgba(91, 49, 113, 0.10);
+    --luany-purple-border: rgba(91, 49, 113, 0.30);
+    --luany-orange-glass:  rgba(230, 135, 74, 0.12);
+
+    --shadow-glow-purple: 0 0 24px rgba(91, 49, 113, 0.18);
+    --shadow-glow-orange: 0 0 16px rgba(230, 135, 74, 0.20);
+    --shadow-card:        0 2px 16px rgba(91, 49, 113, 0.10);
+    --shadow-elevated:    0 8px 32px rgba(91, 49, 113, 0.15);
+}
+
 /* ── Global ──────────────────────────────────────────────────── */
 
 html { scroll-behavior: smooth; }
@@ -91,10 +123,11 @@ body {
     font-family: var(--font-body);
     font-size: var(--text-base);
     color: var(--color-text);
-    background: var(--color-bg);
+    background: var(--color-bg-card);
     line-height: 1.65;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: background var(--transition-slow), color var(--transition-slow);
 }
 
 a    { color: inherit; text-decoration: none; }
