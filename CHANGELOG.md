@@ -13,6 +13,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.1.2] — 2026-03-07
 
+### Added
+- Light mode — `[data-theme="light"]` token layer in `base.css`, anti-FOUC script in `main.lte`, theme toggle in navbar with `localStorage` persistence
+- Home componentized — sections split into `views/pages/home/` (hero, playground, pipeline, features, nextsteps)
+- `nextsteps.lte` — CLI reference section replacing the generic CTA
+- `theme.to_light` / `theme.to_dark` translation keys in `lang/en.php` and `lang/pt.php`
+
+### Changed
+- Hero copy updated — speaks to developers who already have the skeleton running
+- README rewritten — minimal skeleton README following industry standard
+
 ### Fixed
 - `<html lang>` attribute now reflects the active locale dynamically (`locale()`) in `main.lte`, `404.lte`, and `500.lte` — previously hardcoded to `"en"`
 - `APP_LOCALE` and `APP_HTTPS` added to `.env.example` — both are read by the i18n middleware and locale controller but were undocumented
