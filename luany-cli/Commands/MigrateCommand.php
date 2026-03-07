@@ -13,7 +13,7 @@ use Luany\Database\Migration\MigrationRunner;
  *
  * Usage: php luany migrate
  */
-class MigrateCommand
+class MigrateCommand extends MigrateBaseCommand
 {
     public function handle(array $args): void
     {
@@ -36,32 +36,6 @@ class MigrateCommand
 
     private function runner(): MigrationRunner
     {
-        return new MigrationRunner(
-            $this->pdo(),
-            BASE_DIR . '/database/migrations'
-        );
-    }
-
-    private function pdo(): \PDO
-    {
-        $env = $this->loadEnv();
-        $dsn = "mysql:host={$env['DB_HOST']};port={$env['DB_PORT']};dbname={$env['DB_NAME']};charset=utf8mb4";
-
-        return new \PDO($dsn, $env['DB_USER'], $env['DB_PASS'], [
-            \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-        ]);
-    }
-
-    private function loadEnv(): array
-    {
-        $file = BASE_DIR . '/.env';
-
-        if (!file_exists($file)) {
-            fwrite(STDERR, "\n  \033[31m✗\033[0m  .env not found. Run: php luany key:generate\n\n");
-            exit(1);
-        }
-
-        return parse_ini_file($file) ?: [];
+        return new MigrationRunner($this->pdo(), $this->migrationPath());
     }
 }
