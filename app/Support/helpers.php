@@ -130,34 +130,3 @@ if (!function_exists('abort')) {
         exit;
     }
 }
-
-if (!function_exists('__')) {
-    /**
-     * Translate a key using the active locale.
-     *
-     * Usage:
-     *   __('nav.home')
-     *   __('footer.copyright', ['year' => date('Y'), 'name' => 'Luany'])
-     *
-     * Returns the key itself when no translation is found —
-     * pages never silently display empty strings.
-     */
-    function __(string $key, array $replace = []): string
-    {
-        return app('translator')->get($key, $replace);
-    }
-}
-
-if (!function_exists('locale')) {
-    /**
-     * Return the currently active locale code.
-     *
-     * Usage:
-     *   locale()           → 'en' | 'pt'
-     *   locale() === 'pt'  → true
-     */
-    function locale(): string
-    {
-        return app('translator')->getLocale();
-    }
-}
