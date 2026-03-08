@@ -5,12 +5,13 @@ namespace App\Providers;
 use Luany\Framework\Application;
 use Luany\Framework\ServiceProvider;
 use Luany\Framework\Support\Env;
-use App\Support\Translator;
+use Luany\Framework\Support\Translator;
 
 /**
  * AppServiceProvider
  *
  * General application bootstrapping:
+ *   - Translator
  *   - Timezone
  *   - Session (cookie params + start)
  *   - URL/path constants
@@ -20,7 +21,6 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(Application $app): void
     {
-        // Translator — singleton, resolved once per request lifecycle
         $app->singleton('translator', function () use ($app) {
             $config = require $app->basePath('config/app.php');
 
