@@ -12,11 +12,11 @@
 
     <div class="page-grid" aria-hidden="true"></div>
 
-    @include('components.home.hero')
-    @include('components.home.playground')
-    @include('components.home.pipeline')
-    @include('components.home.features')
-    @include('components.home.nextsteps')
+    @include('pages.home.hero')
+    @include('pages.home.playground')
+    @include('pages.home.pipeline')
+    @include('pages.home.features')
+    @include('pages.home.nextsteps')
 
 @endsection
 
