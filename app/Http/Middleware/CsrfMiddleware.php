@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
 use Luany\Core\Http\Request;
 use Luany\Core\Http\Response;

@@ -14,7 +14,7 @@ class MakeMiddlewareCommand
         }
 
         $name = $this->normalise($name, 'Middleware');
-        $path = BASE_DIR . "/app/Middleware/{$name}.php";
+        $path = BASE_DIR . "/app/Http/Middleware/{$name}.php";
 
         if (file_exists($path)) {
             echo "\n  \033[33m⚠\033[0m  {$name} already exists.\n\n";
@@ -23,7 +23,7 @@ class MakeMiddlewareCommand
 
         file_put_contents($path, $this->stub($name));
 
-        echo "\n  \033[32m✓\033[0m  Middleware created: app/Middleware/{$name}.php\n\n";
+        echo "\n  \033[32m✓\033[0m  Middleware created: app/Http/Middleware/{$name}.php\n\n";
     }
 
     private function stub(string $name): string
@@ -31,7 +31,7 @@ class MakeMiddlewareCommand
         return <<<PHP
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
 use Luany\Core\Http\Request;
 use Luany\Core\Http\Response;

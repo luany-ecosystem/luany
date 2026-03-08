@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
 use Luany\Framework\Http\Middleware\LocaleMiddleware as BaseLocaleMiddleware;
 class LocaleMiddleware extends BaseLocaleMiddleware

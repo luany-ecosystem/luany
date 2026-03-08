@@ -3,8 +3,8 @@
 namespace App\Http;
 
 use Luany\Framework\Http\Kernel as BaseKernel;
-use App\Middleware\LocaleMiddleware;
-use App\Middleware\CsrfMiddleware;
+use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\CsrfMiddleware;
 
 /**
  * Application HTTP Kernel
