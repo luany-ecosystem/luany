@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500 — Server Error | {{ env('APP_NAME', 'Luany') }}</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/icon/luany.svg') }}">
+    <script>(function(){var t=localStorage.getItem('luany-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());</script>
     <style>
         /* ── Reset ─────────────────────────────────────────────── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         a    { color: inherit; text-decoration: none; }
 
-        /* ── Tokens ─────────────────────────────────────────────── */
+        /* ── Tokens — dark (default) ────────────────────────────── */
         :root {
             --purple:        #5B3171;
             --purple-mid:    #7A4493;
@@ -34,6 +35,19 @@
             --transition:    .2s var(--ease);
             --mono:          'JetBrains Mono', 'Fira Code', monospace;
             --sans:          'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ── Tokens — light ─────────────────────────────────────── */
+        [data-theme="light"] {
+            --dark:          #F4F0FF;
+            --dark-card:     #FFFFFF;
+            --text:          rgba(18, 8, 28, 0.92);
+            --text-muted:    rgba(18, 8, 28, 0.55);
+            --text-faint:    rgba(18, 8, 28, 0.30);
+            --border:        rgba(91, 49, 113, 0.18);
+            --purple-glass:  rgba(91, 49, 113, 0.10);
+            --purple-border: rgba(91, 49, 113, 0.28);
+            --orange-glass:  rgba(230, 135, 74, 0.12);
         }
 
         /* ── Base ───────────────────────────────────────────────── */
@@ -75,6 +89,7 @@
             background: radial-gradient(circle, rgba(91,49,113,.6) 0%, transparent 70%);
             animation: drift-right 22s ease-in-out infinite alternate;
         }
+        [data-theme="light"] .error-bg-glow { opacity: .15; }
         .error-bg-grid {
             position: absolute;
             inset: 0;
@@ -83,6 +98,11 @@
                 linear-gradient(90deg, rgba(91,49,113,.06) 1px, transparent 1px);
             background-size: 48px 48px;
             mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+        }
+        [data-theme="light"] .error-bg-grid {
+            background-image:
+                linear-gradient(rgba(91,49,113,.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(91,49,113,.10) 1px, transparent 1px);
         }
 
         @keyframes drift-left  { to { transform: translateY(-50%) translate(3vw, 4vh) scale(1.08); } }
