@@ -87,13 +87,13 @@ return [
     'nextsteps.title'    => 'O que vem a seguir?',
     'nextsteps.lead'     => 'O teu ambiente está pronto. Corre estes comandos para criar A sua primeira feature.',
 
-    'nextsteps.cmd1'  => 'php luany make:controller Nome',
+    'nextsteps.cmd1'  => 'luany make:controller Nome',
     'nextsteps.desc1' => 'Cria um novo controller em app/Controllers/',
-    'nextsteps.cmd2'  => 'php luany make:model Nome',
+    'nextsteps.cmd2'  => 'luany make:model Nome',
     'nextsteps.desc2' => 'Cria uma classe model em app/Models/',
-    'nextsteps.cmd3'  => 'php luany make:migration nome',
+    'nextsteps.cmd3'  => 'luany make:migration nome',
     'nextsteps.desc3' => 'Gera um ficheiro de migração com timestamp',
-    'nextsteps.cmd4'  => 'php luany migrate',
+    'nextsteps.cmd4'  => 'luany migrate',
     'nextsteps.desc4' => 'Executa todas as migrações pendentes',
 
     'nextsteps.docs'    => 'Ler a Documentação →',

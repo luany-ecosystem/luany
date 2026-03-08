@@ -5,7 +5,7 @@ use Luany\Database\Migration\Migration;
 /**
  * CreateUsersTable
  *
- * Example migration — run with: php luany migrate
+ * Example migration — run with: luany migrate
  */
 class CreateUsersTable extends Migration
 {

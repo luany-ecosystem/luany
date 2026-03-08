@@ -87,13 +87,13 @@ return [
     'nextsteps.title'    => "What's next?",
     'nextsteps.lead'     => 'Your environment is wired. Run these to scaffold your first feature.',
 
-    'nextsteps.cmd1'  => 'php luany make:controller Name',
+    'nextsteps.cmd1'  => 'luany make:controller Name',
     'nextsteps.desc1' => 'Scaffold a new controller in app/Controllers/',
-    'nextsteps.cmd2'  => 'php luany make:model Name',
+    'nextsteps.cmd2'  => 'luany make:model Name',
     'nextsteps.desc2' => 'Create a model class in app/Models/',
-    'nextsteps.cmd3'  => 'php luany make:migration name',
+    'nextsteps.cmd3'  => 'luany make:migration name',
     'nextsteps.desc3' => 'Generate a timestamped migration file',
-    'nextsteps.cmd4'  => 'php luany migrate',
+    'nextsteps.cmd4'  => 'luany migrate',
     'nextsteps.desc4' => 'Run all pending database migrations',
 
     'nextsteps.docs'    => 'Read the Docs →',
