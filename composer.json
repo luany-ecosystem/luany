@@ -23,8 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "LuanyCli\\": "luany-cli/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {
@@ -35,8 +34,8 @@
     "scripts": {
         "post-create-project-cmd": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "@php luany key:generate",
-            "@php -r \"echo '\\n✅ Luany installed!\\n   Edit .env then: php luany serve\\n\\n';\""
+            "@php -r \"$key = 'base64:' . base64_encode(random_bytes(32)); $content = file_get_contents('.env'); $content = preg_replace('/^APP_KEY=.*/m', 'APP_KEY=' . $key, $content); file_put_contents('.env', $content); echo '\\n  ✓  Application key set.\\n';\"",
+            "@php -r \"echo '\\n  ✓  Luany installed! Run: luany serve\\n\\n';\""
         ]
     },
     "config": {
