@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56ff518013a3d69a59f29656e1d3baec",
+    "content-hash": "d0a9446077692228078d51de02ee7df4",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -180,16 +180,16 @@
         },
         {
             "name": "luany/framework",
-            "version": "v0.2.2",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luany-ecosystem/luany-framework.git",
-                "reference": "b962293f78b87cf64cda2c24e62696e887b48da5"
+                "reference": "7761232744dd706ea0f8b3cf2186062a38445bfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luany-ecosystem/luany-framework/zipball/b962293f78b87cf64cda2c24e62696e887b48da5",
-                "reference": "b962293f78b87cf64cda2c24e62696e887b48da5",
+                "url": "https://api.github.com/repos/luany-ecosystem/luany-framework/zipball/7761232744dd706ea0f8b3cf2186062a38445bfc",
+                "reference": "7761232744dd706ea0f8b3cf2186062a38445bfc",
                 "shasum": ""
             },
             "require": {
@@ -235,9 +235,9 @@
             ],
             "support": {
                 "issues": "https://github.com/luany-ecosystem/luany-framework/issues",
-                "source": "https://github.com/luany-ecosystem/luany-framework/tree/v0.2.2"
+                "source": "https://github.com/luany-ecosystem/luany-framework/tree/v0.3.0"
             },
-            "time": "2026-03-06T06:43:03+00:00"
+            "time": "2026-03-08T11:18:07+00:00"
         },
         {
             "name": "luany/lte",
