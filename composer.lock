@@ -70,16 +70,16 @@
         },
         {
             "name": "luany/core",
-            "version": "v0.2.1",
+            "version": "v0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luany-ecosystem/luany-core.git",
-                "reference": "67d5f26a2e64d635a37a506b6fe39c10d341f6c2"
+                "reference": "cf7cb6eb3ffc92f5fc3214e4afadb45f9312480f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luany-ecosystem/luany-core/zipball/67d5f26a2e64d635a37a506b6fe39c10d341f6c2",
-                "reference": "67d5f26a2e64d635a37a506b6fe39c10d341f6c2",
+                "url": "https://api.github.com/repos/luany-ecosystem/luany-core/zipball/cf7cb6eb3ffc92f5fc3214e4afadb45f9312480f",
+                "reference": "cf7cb6eb3ffc92f5fc3214e4afadb45f9312480f",
                 "shasum": ""
             },
             "require": {
@@ -118,9 +118,9 @@
             ],
             "support": {
                 "issues": "https://github.com/luany-ecosystem/luany-core/issues",
-                "source": "https://github.com/luany-ecosystem/luany-core/tree/v0.2.1"
+                "source": "https://github.com/luany-ecosystem/luany-core/tree/v0.2.3"
             },
-            "time": "2026-03-05T06:59:21+00:00"
+            "time": "2026-03-08T11:06:52+00:00"
         },
         {
             "name": "luany/database",
