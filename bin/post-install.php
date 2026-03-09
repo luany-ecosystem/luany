@@ -10,7 +10,7 @@
  *   - Displaying the welcome screen
  */
 
-// ── .env ─────────────────────────────────────────────────────────────────────
+// ── .env ──────────────────────────────────────────────────────────────────────
 
 if (!file_exists('.env')) {
     if (!file_exists('.env.example')) {
@@ -29,23 +29,19 @@ file_put_contents('.env', $content);
 
 // ── Welcome ───────────────────────────────────────────────────────────────────
 
-$p = "\033[38;5;55m";  // luany-purple
-$o = "\033[38;5;208m"; // luany-orange
-$r = "\033[0m";
-
-echo PHP_EOL;
-echo "  {$p}██╗     ██╗   ██╗ █████╗ ███╗   ██╗██╗   ██╗{$r}" . PHP_EOL;
-echo "  {$p}██║     ██║   ██║██╔══██╗████╗  ██║╚██╗ ██╔╝{$r}" . PHP_EOL;
-echo "  {$p}██║     ██║   ██║███████║██╔██╗ ██║ ╚████╔╝ {$r}" . PHP_EOL;
-echo "  {$p}██║     ██║   ██║██╔══██║██║╚██╗██║  ╚██╔╝  {$r}" . PHP_EOL;
-echo "  {$p}███████╗╚██████╔╝██║  ██║██║ ╚████║   ██║   {$r}" . PHP_EOL;
-echo "  {$p}╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝  {$r}" . PHP_EOL;
-echo PHP_EOL;
-echo "  \033[32m✓\033[0m  .env created" . PHP_EOL;
-echo "  \033[32m✓\033[0m  Application key set" . PHP_EOL;
-echo PHP_EOL;
-echo "  {$o}Next steps:{$r}" . PHP_EOL;
-echo "    1. Configure your database in \033[36m.env\033[0m" . PHP_EOL;
-echo "    2. \033[36mluany migrate\033[0m" . PHP_EOL;
-echo "    3. \033[36mluany serve\033[0m" . PHP_EOL;
-echo PHP_EOL;
+echo "\n";
+echo "  \033[38;5;55m██╗     ██╗   ██╗ █████╗ ███╗   ██╗██╗   ██╗\033[0m\n";
+echo "  \033[38;5;55m██║     ██║   ██║██╔══██╗████╗  ██║╚██╗ ██╔╝\033[0m\n";
+echo "  \033[38;5;55m██║     ██║   ██║███████║██╔██╗ ██║ ╚████╔╝ \033[0m\n";
+echo "  \033[38;5;55m██║     ██║   ██║██╔══██║██║╚██╗██║  ╚██╔╝  \033[0m\n";
+echo "  \033[38;5;55m███████╗╚██████╔╝██║  ██║██║ ╚████║   ██║   \033[0m\n";
+echo "  \033[38;5;55m╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝  \033[0m\n";
+echo "\n";
+echo "  \033[32m✓\033[0m  .env created\n";
+echo "  \033[32m✓\033[0m  Application key set\n";
+echo "\n";
+echo "  \033[38;5;208mNext steps:\033[0m\n";
+echo "    1. Configure your database in \033[36m.env\033[0m\n";
+echo "    2. \033[36mluany migrate\033[0m\n";
+echo "    3. \033[36mluany serve\033[0m\n";
+echo "\n";
