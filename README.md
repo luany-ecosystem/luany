@@ -1,30 +1,162 @@
-# luany
+# luany/luany
 
-Official application skeleton for the [Luany Framework](https://github.com/luany-ecosystem/luany-framework).
+Official application skeleton for the Luany Framework.
 
 [![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?style=flat-square&logo=php)](https://php.net)
 [![Framework](https://img.shields.io/badge/luany%2Fframework-v0.3-5B3171?style=flat-square)](https://packagist.org/packages/luany/framework)
 [![License](https://img.shields.io/badge/license-MIT-E6874A?style=flat-square)](LICENSE)
 
-## Quick start
+## Requirements
 
-Install the Luany CLI globally:
+- PHP 8.1+
+- Composer 2.0+
+- PDO + pdo_mysql extension
+- luany/cli (global)
+
+## Installation
 ```bash
 composer global require luany/cli
+luany new my-app
+cd my-app
 ```
 
-Create a new project:
+Or directly via Composer:
 ```bash
 composer create-project luany/luany my-app
 cd my-app
+```
+
+## Getting started
+```bash
+# 1. Configure your database
+#    Edit DB_HOST, DB_NAME, DB_USER, DB_PASS in .env
+
+# 2. Verify your environment
+luany doctor
+
+# 3. Run migrations
+luany migrate
+
+# 4. Start the development server
 luany serve
 ```
 
 Open `http://localhost:8000`.
 
+## Directory structure
+```
+my-app/
+├── app/
+│   ├── Controllers/
+│   ├── Exceptions/
+│   ├── Http/
+│   │   ├── Kernel.php
+│   │   └── Middleware/
+│   ├── Models/
+│   ├── Providers/
+│   └── Support/
+├── bootstrap/
+│   └── app.php
+├── config/
+│   ├── app.php
+│   └── mail.php
+├── database/
+│   └── migrations/
+├── lang/
+│   ├── en.php
+│   └── pt.php
+├── public/
+│   ├── index.php
+│   └── assets/
+├── routes/
+│   └── http.php
+├── storage/
+│   ├── cache/views/
+│   └── logs/
+├── views/
+│   ├── components/
+│   ├── layouts/
+│   └── pages/
+├── .env.example
+└── composer.json
+```
+
+## Key concepts
+
+**Routing** — defined in `routes/http.php`:
+```php
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+```
+
+**Controllers** — extend the base `Controller`:
+```php
+class HomeController extends Controller
+{
+    public function index(Request $request): string
+    {
+        return view('pages.home', compact('data'));
+    }
+}
+```
+
+**Views** — LTE template engine, stored in `views/`:
+```lte
+@extends('layouts.main')
+
+@section('title')My Page@endsection
+
+@section('content')
+    <h1>{{ $title }}</h1>
+@endsection
+```
+
+**Migrations** — in `database/migrations/`:
+```php
+class CreateUsersTable extends Migration
+{
+    public function up(\PDO $pdo): void
+    {
+        $pdo->exec("CREATE TABLE IF NOT EXISTS `users` (...)");
+    }
+
+    public function down(\PDO $pdo): void
+    {
+        $pdo->exec("DROP TABLE IF EXISTS `users`");
+    }
+}
+```
+
+**Models** — ActiveRecord base:
+```php
+class User extends Model
+{
+    protected string $table   = 'users';
+    protected array $fillable = ['name', 'email', 'password'];
+    protected array $hidden   = ['password'];
+}
+```
+
+## CLI reference
+```bash
+luany make:controller <Name>      # scaffold controller
+luany make:model <Name>           # scaffold model
+luany make:migration <name>       # generate migration file
+luany make:middleware <Name>      # scaffold middleware
+luany make:view <name> [type]     # create LTE view
+luany migrate                     # run pending migrations
+luany migrate:status              # show migration status
+luany migrate:rollback            # rollback last batch
+luany migrate:fresh               # drop all and re-migrate
+luany key:generate                # regenerate APP_KEY
+luany cache:clear                 # clear compiled views
+luany doctor                      # environment health check
+luany serve                       # start dev server
+```
+
 ## Documentation
 
-Full documentation at **[docs.luany.dev](https://docs.luany.dev)** *(coming soon)*.
+[docs.luany.dev](https://docs.luany.dev)
 
 ## License
 
