@@ -31,6 +31,14 @@ class CsrfMiddleware implements MiddlewareInterface
 
     public function handle(Request $request, callable $next): Response
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+
         if ($this->isReading($request) || $this->inExceptList($request)) {
             return $next($request);
         }
@@ -62,13 +70,9 @@ class CsrfMiddleware implements MiddlewareInterface
 
     private function tokensMatch(Request $request): bool
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $sessionToken = $_SESSION['_csrf_token'] ?? '';
-        $inputToken   = $request->input('_token', '')
-                     ?: $request->header('X-CSRF-Token', '');
+        $sessionToken = $_SESSION['csrf_token'] ?? '';
+        $inputToken   = $request->input('csrf_token', '')
+                    ?: $request->header('X-CSRF-Token', '');
 
         if (empty($sessionToken) || empty($inputToken)) {
             return false;
@@ -79,7 +83,7 @@ class CsrfMiddleware implements MiddlewareInterface
 
     private function regenerateToken(): void
     {
-        $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
 
     private function forbiddenPage(): string
