@@ -1,0 +1,111 @@
+name: Luany Ecosystem CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: "PHPUnit — ${{ matrix.package }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - luany-core
+          - luany-framework
+          - luany-database
+          - luany-lte
+          - luany-cli
+        php: ["8.1", "8.2", "8.3"]
+
+    steps:
+      - name: Checkout ecosystem
+        uses: actions/checkout@v4
+        with:
+          repository: luany-ecosystem/${{ matrix.package }}
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo, pdo_sqlite, mbstring
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit --colors=always
+
+  phpstan:
+    name: "PHPStan Level 5 — ${{ matrix.package }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - luany-core
+          - luany-framework
+          - luany-database
+          - luany-lte
+          - luany-cli
+
+    steps:
+      - name: Checkout ecosystem
+        uses: actions/checkout@v4
+        with:
+          repository: luany-ecosystem/${{ matrix.package }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: pdo, pdo_sqlite, mbstring
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Install PHPStan
+        run: composer require --dev phpstan/phpstan:^1.0 --no-interaction
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse src --level=5 --no-progress
+
+  code-style:
+    name: "Code Style — ${{ matrix.package }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - luany-core
+          - luany-framework
+          - luany-database
+          - luany-lte
+          - luany-cli
+
+    steps:
+      - name: Checkout ecosystem
+        uses: actions/checkout@v4
+        with:
+          repository: luany-ecosystem/${{ matrix.package }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: php-cs-fixer
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run PHP CS Fixer (dry-run)
+        run: php-cs-fixer fix src --dry-run --diff --rules=@PSR12
