@@ -22,14 +22,14 @@ return [
     'theme.to_dark'  => 'Switch to dark mode',
 
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v0.2 — Stack wired · APP_ENV=development',
+    'hero.eyebrow'       => 'v1.0 — Stack wired · APP_ENV=development',
     'hero.title_line1'   => 'Your application is',
     'hero.title_accent'  => 'running.',
     'hero.subtitle'      => 'Create a controller, define a route, ship your first view page.<br>Everything is wired — start building.',
     'hero.cta_primary'   => 'Read the Docs →',
     'hero.cta_secondary' => 'GitHub',
     'hero.stat_regex'    => 'regex',
-    'hero.stat_tests'    => 'tests',
+    'hero.stat_tests'    => '252',
     'hero.stat_compiler' => 'compiler',
 
     // ── Playground ────────────────────────────────────────────

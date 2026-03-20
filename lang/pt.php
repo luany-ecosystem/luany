@@ -22,14 +22,14 @@ return [
     'theme.to_dark'  => 'Mudar para modo escuro',
 
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v0.2 — Stack pronta · APP_ENV=development',
+    'hero.eyebrow'       => 'v1.0 — Stack pronta · APP_ENV=development',
     'hero.title_line1'   => 'A sua aplicação está em',
     'hero.title_accent'  => 'execução',
     'hero.subtitle'      => 'Crie um controlador, defina uma rota e lance a sua primeira página de visualização.<br>Tudo está ligado — começa a construir.',
     'hero.cta_primary'   => 'Ler a Documentação →',
     'hero.cta_secondary' => 'GitHub',
     'hero.stat_regex'    => 'regex',
-    'hero.stat_tests'    => 'testes',
+    'hero.stat_tests'    => '252',
     'hero.stat_compiler' => 'compilador',
 
     // ── Playground ────────────────────────────────────────────
