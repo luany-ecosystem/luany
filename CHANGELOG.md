@@ -6,21 +6,21 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased] — next/v1
+## [1.0.0] — 2026-03-22
+
+### Added
+- Live reload support via BrowserSync (`npm run dev`)
+- Flash helpers: `flash()` and `get_flash()`
+- Flash component with animation and improved UI
 
 ### Changed
-- `composer.json` — updated constraints: `luany/framework ^0.3 → ^0.4`, `luany/database ^0.1 → ^0.3`.
-- `app/Support/helpers.php` — `flash()` and `get_flash()` now use `session()` framework service instead of `$_SESSION` directly. `auth_user()` uses `session()->get()`. Consistent with framework session abstraction.
-- `app/Providers/AppServiceProvider` — removed `startSession()`. Session lifecycle is managed by `Kernel::registerSession()` via `FileSession`. Calling `session_start()` twice caused conflicts.
-- `lang/en.php` and `lang/pt.php` — updated `hero.eyebrow` to `v1.0`, `hero.stat_tests` to `252`.
-
-### Fixed
-- `app/Support/helpers.php` — removed duplicate `csrf_token()` that used `$_SESSION['_csrf_token']`. The framework's `csrf_token()` uses `$_SESSION['csrf_token']` (via `CsrfToken` service) and the `CsrfMiddleware` validates against `csrf_token` — the skeleton's version used a different key, causing CSRF validation to always fail on form submissions.
-- `app/Support/helpers.php` — removed duplicate `abort()` that used `http_response_code() + echo + exit`. The framework's `abort()` throws `HttpException`, which is caught by the Kernel and converted to a proper `Response`. The old implementation bypassed the response lifecycle entirely.
-- `views/pages/errors/404.lte` and `views/pages/errors/500.lte` — converted `<?php echo htmlspecialchars(...) ?>` raw PHP to LTE syntax (`{{ }}` for escaped output, `{!! !!}` for raw). Views are rendered through the LTE engine and should use LTE syntax throughout.
+- Minimum PHP version raised to 8.2
+- Upgraded core dependencies to stable 1.0 releases
+- Improved README with development workflow and CLI commands
+- Simplified route loading via auto-discovery
 
 ### Breaking Changes
-- None for end users. All changes fix internal inconsistencies between the skeleton and the framework packages.
+- PHP 8.1 is no longer supported
 
 ---
 

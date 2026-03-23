@@ -98,7 +98,7 @@ return [
 
     'nextsteps.docs'    => 'Ler a Documentação →',
     'nextsteps.github'  => 'Ver no GitHub',
-    'nextsteps.version' => 'luany/framework v0.2 · Licença MIT',
+    'nextsteps.version' => 'luany/framework v1.0 · Licença MIT',
 
     // ── Footer ────────────────────────────────────────────────
     'footer.tagline'       => 'Framework PHP MVC compilada em AST.<br>Ciclo de vida explícito. Zero regex.',

@@ -157,7 +157,7 @@
                 <span class="hero-stat-val">AST</span> {{ __('hero.stat_compiler') }}
             </div>
             <div class="hero-stat">
-                <span class="hero-stat-val">PHP</span> 8.1+
+                <span class="hero-stat-val">PHP</span> 8.2+
             </div>
         </div>
 

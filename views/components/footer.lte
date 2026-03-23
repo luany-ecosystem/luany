@@ -146,10 +146,10 @@
             <div class="footer-col">
                 <p class="footer-col-title">{{ __('footer.col_ecosystem') }}</p>
                 <ul class="footer-col-links">
-                    <li><a href="https://github.com/luany-ecosystem/luany-framework" target="_blank" rel="noopener noreferrer">luany/framework <span class="footer-pkg-badge">v0.2</span></a></li>
-                    <li><a href="https://github.com/luany-ecosystem/luany-core"      target="_blank" rel="noopener noreferrer">luany/core      <span class="footer-pkg-badge">v0.2</span></a></li>
-                    <li><a href="https://github.com/luany-ecosystem/luany-lte"       target="_blank" rel="noopener noreferrer">luany/lte       <span class="footer-pkg-badge">v0.2</span></a></li>
-                    <li><a href="https://github.com/luany-ecosystem/luany-database"  target="_blank" rel="noopener noreferrer">luany/database  <span class="footer-pkg-badge">v0.1</span></a></li>
+                    <li><a href="https://github.com/luany-ecosystem/luany-framework" target="_blank" rel="noopener noreferrer">luany framework <span class="footer-pkg-badge">v1.0</span></a></li>
+                    <li><a href="https://github.com/luany-ecosystem/luany-core"      target="_blank" rel="noopener noreferrer">luany core      <span class="footer-pkg-badge">v1.0</span></a></li>
+                    <li><a href="https://github.com/luany-ecosystem/luany-lte"       target="_blank" rel="noopener noreferrer">luany lte       <span class="footer-pkg-badge">v1.0</span></a></li>
+                    <li><a href="https://github.com/luany-ecosystem/luany-database"  target="_blank" rel="noopener noreferrer">luany database  <span class="footer-pkg-badge">v1.0</span></a></li>
                 </ul>
             </div>
 

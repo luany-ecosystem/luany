@@ -76,7 +76,7 @@ if (!function_exists('flash')) {
      */
     function flash(string $type, string $message): void
     {
-        session()->flash('_flash', compact('type', 'message'));
+        session()->flash('flash_message', compact('type', 'message'));
     }
 }
 
@@ -87,9 +87,9 @@ if (!function_exists('get_flash')) {
      */
     function get_flash(): ?array
     {
-        $flash = session()->get('_flash');
-        if ($flash !== null) {
-            session()->forget('_flash');
+        $flash = session()->get('flash_message');
+        if (!is_array($flash) || !isset($flash['type'], $flash['message'])) {
+            return null;
         }
         return $flash;
     }

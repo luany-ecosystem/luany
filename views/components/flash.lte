@@ -9,26 +9,31 @@
     font-weight: 500;
     animation: slideDown .25s var(--ease);
     border-bottom: 1px solid transparent;
+    backdrop-filter: blur(6px);
+    border-radius: var(--radius-md);
 }
 .flash-bar[data-type="success"] {
-    background: rgba(34, 197, 94, .1);
-    border-color: rgba(34, 197, 94, .3);
-    color: #4ade80;
+    background: rgba(34, 197, 94, .15);
+    border-color: rgba(34, 197, 94, .5);
+    color: var(--color-success);
 }
+
 .flash-bar[data-type="error"] {
-    background: rgba(242, 68, 29, .1);
-    border-color: rgba(242, 68, 29, .3);
-    color: #f87171;
+    background: rgba(239, 68, 68, .15);
+    border-color: rgba(239, 68, 68, .5);
+    color: var(--color-error);
 }
+
 .flash-bar[data-type="warning"] {
-    background: rgba(245, 158, 11, .1);
-    border-color: rgba(245, 158, 11, .3);
-    color: #fbbf24;
+    background: rgba(245, 158, 11, .15);
+    border-color: rgba(245, 158, 11, .5);
+    color: var(--color-warning);
 }
+
 .flash-bar[data-type="info"] {
-    background: rgba(56, 189, 248, .1);
-    border-color: rgba(56, 189, 248, .3);
-    color: #38bdf8;
+    background: rgba(56, 189, 248, .15);
+    border-color: rgba(56, 189, 248, .5);
+    color: var(--color-info);
 }
 .flash-close {
     background: none;
