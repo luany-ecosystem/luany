@@ -2,18 +2,17 @@
 
 Official application skeleton for the Luany Framework.
 
-[![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?style=flat-square&logo=php)](https://php.net)
-[![Framework](https://img.shields.io/badge/luany%2Fframework-v0.3-5B3171?style=flat-square)](https://packagist.org/packages/luany/framework)
+[![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php)](https://php.net)
+[![Framework](https://img.shields.io/badge/luany%2Fframework-v1.0-5B3171?style=flat-square)](https://packagist.org/packages/luany/framework)
 [![License](https://img.shields.io/badge/license-MIT-E6874A?style=flat-square)](LICENSE)
 
 ## Requirements
 
-- PHP 8.1+
+- PHP 8.2+
 - Composer 2.0+
-- PDO + pdo_mysql extension
-- luany/cli (global)
 
 ## Installation
+
 ```bash
 composer global require luany/cli
 luany new my-app
@@ -21,13 +20,15 @@ cd my-app
 ```
 
 Or directly via Composer:
+
 ```bash
 composer create-project luany/luany my-app
 cd my-app
 ```
 
 ## Getting started
-```bash
+
+````bash
 # 1. Configure your database
 #    Edit DB_HOST, DB_NAME, DB_USER, DB_PASS in .env
 
@@ -37,13 +38,26 @@ luany doctor
 # 3. Run migrations
 luany migrate
 
-# 4. Start the development server
+## Development
+```bash
 luany serve
-```
+````
 
 Open `http://localhost:8000`.
 
+For automatic browser reload during development:
+
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+Starts the PHP server and enables live reload via BrowserSync — views and assets reload automatically on change.```
+
 ## Directory structure
+
 ```
 my-app/
 ├── app/
@@ -84,12 +98,14 @@ my-app/
 ## Key concepts
 
 **Routing** — defined in `routes/http.php`:
+
 ```php
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 ```
 
 **Controllers** — extend the base `Controller`:
+
 ```php
 class HomeController extends Controller
 {
@@ -101,6 +117,7 @@ class HomeController extends Controller
 ```
 
 **Views** — LTE template engine, stored in `views/`:
+
 ```lte
 @extends('layouts.main')
 
@@ -112,6 +129,7 @@ class HomeController extends Controller
 ```
 
 **Migrations** — in `database/migrations/`:
+
 ```php
 class CreateUsersTable extends Migration
 {
@@ -128,6 +146,7 @@ class CreateUsersTable extends Migration
 ```
 
 **Models** — ActiveRecord base:
+
 ```php
 class User extends Model
 {
@@ -138,12 +157,17 @@ class User extends Model
 ```
 
 ## CLI reference
+
 ```bash
 luany make:controller <Name>      # scaffold controller
 luany make:model <Name>           # scaffold model
 luany make:migration <name>       # generate migration file
 luany make:middleware <Name>      # scaffold middleware
 luany make:view <name> [type]     # create LTE view
+luany make:feature <Name>         # scaffold full CRUD feature
+luany make:request <Name>         # scaffold form request class
+luany make:test <Name>            # scaffold PHPUnit test class
+luany route:list                  # list all registered routes
 luany migrate                     # run pending migrations
 luany migrate:status              # show migration status
 luany migrate:rollback            # rollback last batch

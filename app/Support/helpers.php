@@ -4,10 +4,13 @@
  * Application Helpers
  *
  * Loaded by AppServiceProvider::boot().
- * All functions use function_exists guards to prevent conflicts.
+ * All functions use function_exists guards to prevent conflicts
+ * with helpers already provided by luany/framework.
  *
- * Framework helpers already available (from luany/framework):
- *   app(), env(), base_path(), view(), redirect(), response()
+ * Framework helpers available automatically (from luany/framework):
+ *   app(), env(), base_path(), view(), redirect(), response(),
+ *   config(), session(), csrf_token(), old(), abort(), validate(),
+ *   __(), locale()
  */
 
 // ── URL helpers ───────────────────────────────────────────────────────────────
@@ -51,23 +54,14 @@ if (!function_exists('e')) {
     }
 }
 
-if (!function_exists('csrf_token')) {
-    function csrf_token(): string
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        if (empty($_SESSION['_csrf_token'])) {
-            $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
-        }
-        return $_SESSION['_csrf_token'];
-    }
-}
-
 if (!function_exists('csrf_field')) {
+    /**
+     * Generate a hidden CSRF input field.
+     * Uses the csrf_token() helper from luany/framework.
+     */
     function csrf_field(): string
     {
-        return '<input type="hidden" name="_token" value="' . csrf_token() . '">';
+        return '<input type="hidden" name="csrf_token" value="' . csrf_token() . '">';
     }
 }
 
@@ -77,13 +71,12 @@ if (!function_exists('flash')) {
     /**
      * Set a flash message for the next request.
      * Types: success | error | warning | info
+     *
+     * Uses the framework session service.
      */
     function flash(string $type, string $message): void
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        $_SESSION['_flash'] = compact('type', 'message');
+        session()->flash('flash_message', compact('type', 'message'));
     }
 }
 
@@ -94,11 +87,10 @@ if (!function_exists('get_flash')) {
      */
     function get_flash(): ?array
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        $flash = session()->get('flash_message');
+        if (!is_array($flash) || !isset($flash['type'], $flash['message'])) {
+            return null;
         }
-        $flash = $_SESSION['_flash'] ?? null;
-        unset($_SESSION['_flash']);
         return $flash;
     }
 }
@@ -108,10 +100,8 @@ if (!function_exists('get_flash')) {
 if (!function_exists('auth_user')) {
     function auth_user(): ?int
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        return isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : null;
+        $id = session()->get('user_id');
+        return $id !== null ? (int) $id : null;
     }
 }
 
@@ -119,14 +109,5 @@ if (!function_exists('is_authenticated')) {
     function is_authenticated(): bool
     {
         return auth_user() !== null;
-    }
-}
-
-if (!function_exists('abort')) {
-    function abort(int $status, string $message = ''): never
-    {
-        http_response_code($status);
-        echo $message;
-        exit;
     }
 }

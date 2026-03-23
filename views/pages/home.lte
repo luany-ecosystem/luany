@@ -3,7 +3,7 @@
 @section('title', ($title ?? env('APP_NAME', 'Luany')) . ' — ' . __('seo.description'))
 
 @push('head')
-    <meta name="description" content="Luany — AST-compiled PHP MVC for PHP 8.1+. Zero-regex template engine. Deterministic pipeline. Explicit lifecycle.">
+    <meta name="description" content="Luany — AST-compiled PHP MVC for PHP 8.2+. Zero-regex template engine. Deterministic pipeline. Explicit lifecycle.">
     <meta property="og:title" content="Luany Framework">
     <meta property="og:type"  content="website">
 @endpush

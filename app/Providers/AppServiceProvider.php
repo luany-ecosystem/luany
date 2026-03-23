@@ -36,7 +36,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Application $app): void
     {
         $this->configureTimezone();
-        $this->startSession();
         $this->defineConstants($app);
         $this->loadHelpers();
     }
@@ -44,20 +43,6 @@ class AppServiceProvider extends ServiceProvider
     private function configureTimezone(): void
     {
         date_default_timezone_set(Env::get('APP_TIMEZONE', 'UTC'));
-    }
-
-    private function startSession(): void
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_set_cookie_params([
-                'lifetime' => 0,
-                'path'     => '/',
-                'secure'   => Env::get('APP_ENV') === 'production',
-                'httponly' => true,
-                'samesite' => 'Lax',
-            ]);
-            session_start();
-        }
     }
 
     private function defineConstants(Application $app): void
