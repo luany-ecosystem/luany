@@ -23,7 +23,6 @@ class Kernel extends BaseKernel
     ];
 
     /**
-     * Routes file — relative to the routes/ directory.
-     */
-    protected string $routesFile = 'http.php';
+    * All route files are automatically loaded by the framework
+    */
 }

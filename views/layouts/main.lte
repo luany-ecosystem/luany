@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script>/* anti-FOUC */(function(){var t=localStorage.getItem('luany-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());</script>
     @stack('head')
+    @styles
 </head>
 <body>
 
@@ -21,7 +22,6 @@
 
     @include('components.footer')
 
-    @styles
     <script src="{{ asset('js/app.js') }}"></script>
     @scripts
     @stack('scripts')
