@@ -9,19 +9,19 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 ## [1.0.0] — 2026-03-22
 
 ### Added
-- Live reload support via BrowserSync (`npm run dev`)
-- Flash helpers: `flash()` and `get_flash()`
+- Live reload development workflow via BrowserSync (`npm run dev`)
+- Flash messaging helpers: `flash()` and `get_flash()`
 - Flash component with animation and improved UI
+- Basic CI workflow for installation and autoload validation
 
 ### Changed
 - Minimum PHP version raised to 8.2
-- Upgraded core dependencies to stable 1.0 releases
+- Upgraded Luany core dependencies to stable 1.0 releases
 - Improved README with development workflow and CLI commands
 - Simplified route loading via auto-discovery
 
 ### Breaking Changes
 - PHP 8.1 is no longer supported
-
 ---
 
 ## [0.2.0] — Initial skeleton
