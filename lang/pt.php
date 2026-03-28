@@ -22,14 +22,14 @@ return [
     'theme.to_dark'  => 'Mudar para modo escuro',
 
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v1.0 — Stack pronta · APP_ENV=development',
-    'hero.title_line1'   => 'A sua aplicação está em',
-    'hero.title_accent'  => 'execução',
-    'hero.subtitle'      => 'Crie um controlador, defina uma rota e lance a sua primeira página de visualização.<br>Tudo está ligado — começa a construir.',
+    'hero.eyebrow'       => 'v1.0 — Compilador-driven · Zero magia · MIT',
+    'hero.title_line1'   => 'A tua aplicação está em',
+    'hero.title_accent'  => 'execução.',
+    'hero.subtitle'      => 'Crie um CRUD completo em 10 segundos.<br>Tudo é explícito — começa a construir.',
     'hero.cta_primary'   => 'Ler a Documentação →',
     'hero.cta_secondary' => 'GitHub',
     'hero.stat_regex'    => 'regex',
-    'hero.stat_tests'    => '252',
+    'hero.stat_tests'    => 'testes',
     'hero.stat_compiler' => 'compilador',
 
     // ── Playground ────────────────────────────────────────────
@@ -67,8 +67,14 @@ return [
 
     // ── Features ──────────────────────────────────────────────
     'features.eyebrow' => 'O que está incluído',
-    'features.title'   => 'Engenhado para clareza',
+    'features.title'   => 'Construído para entregar rápido',
     'features.empty'   => 'Nenhuma funcionalidade encontrada.',
+
+    'features.scaffold.name' => 'CRUD Completo num Comando',
+    'features.scaffold.desc' => 'luany make:feature Product name:string price:decimal — gera model, controller, migração, 4 views e rotas. Pronto a correr em segundos.',
+
+    'features.lde.name' => 'Dev Engine (LDE)',
+    'features.lde.desc' => 'Live reload sem proxy. CSS injectado instantaneamente, PHP/LTE recarregado limpo. WebSocket transporta apenas sinais — sem loops, sem corrupção de sessão.',
 
     'features.ast.name' => 'Motor de Templates AST',
     'features.ast.desc' => 'O LTE compila via AST — zero regex, output previsível, CSS e JS colocalizados com blocos @style e @script.',
@@ -82,19 +88,26 @@ return [
     'features.csrf.name' => 'Protecção CSRF',
     'features.csrf.desc' => 'Verificação automática de token em cada request que altera estado. Uma directiva @csrf no formulário — pronto.',
 
+    'features.orm.name' => 'ORM Active Record',
+    'features.orm.desc' => 'QueryBuilder fluente, relações (hasOne, hasMany, belongsTo), SoftDeletes, eager loading e migrações — tudo incluído. Zero dependências externas.',
+
+    'features.validation.name' => 'Motor de Validação',
+    'features.validation.desc' => 'validate() numa linha — required, email, unique, confirmed, min/max e mais. Redireciona com erros e input anterior automaticamente.',
+
+
     // ── Next Steps ────────────────────────────────────────────
     'nextsteps.eyebrow'  => 'Referência CLI',
     'nextsteps.title'    => 'O que vem a seguir?',
-    'nextsteps.lead'     => 'O teu ambiente está pronto. Corre estes comandos para criar A sua primeira feature.',
+    'nextsteps.lead'     => 'O teu ambiente está pronto. Estes quatro comandos levam-te do zero a uma feature a correr.',
 
-    'nextsteps.cmd1'  => 'luany make:controller Nome',
-    'nextsteps.desc1' => 'Cria um novo controller em app/Controllers/',
-    'nextsteps.cmd2'  => 'luany make:model Nome',
-    'nextsteps.desc2' => 'Cria uma classe model em app/Models/',
-    'nextsteps.cmd3'  => 'luany make:migration nome',
-    'nextsteps.desc3' => 'Gera um ficheiro de migração com timestamp',
-    'nextsteps.cmd4'  => 'luany migrate',
-    'nextsteps.desc4' => 'Executa todas as migrações pendentes',
+    'nextsteps.cmd1'  => 'luany make:feature Product name:string price:decimal',
+    'nextsteps.desc1' => 'CRUD completo — model, controller, migração, 4 views, rotas',
+    'nextsteps.cmd2'  => 'luany migrate',
+    'nextsteps.desc2' => 'Executa todas as migrações pendentes',
+    'nextsteps.cmd3'  => 'luany route:list',
+    'nextsteps.desc3' => 'Lista todas as rotas registadas',
+    'nextsteps.cmd4'  => 'luany dev',
+    'nextsteps.desc4' => 'Inicia o servidor com live reload',
 
     'nextsteps.docs'    => 'Ler a Documentação →',
     'nextsteps.github'  => 'Ver no GitHub',

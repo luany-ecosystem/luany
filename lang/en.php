@@ -22,14 +22,14 @@ return [
     'theme.to_dark'  => 'Switch to dark mode',
 
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v1.0 — Stack wired · APP_ENV=development',
+    'hero.eyebrow'       => 'v1.0 — Compiler-driven · Zero magic · MIT',
     'hero.title_line1'   => 'Your application is',
     'hero.title_accent'  => 'running.',
-    'hero.subtitle'      => 'Create a controller, define a route, ship your first view page.<br>Everything is wired — start building.',
+    'hero.subtitle'      => 'Build a complete CRUD in 10 seconds.<br>Everything is explicit — start shipping.',
     'hero.cta_primary'   => 'Read the Docs →',
     'hero.cta_secondary' => 'GitHub',
     'hero.stat_regex'    => 'regex',
-    'hero.stat_tests'    => '252',
+    'hero.stat_tests'    => 'tests',
     'hero.stat_compiler' => 'compiler',
 
     // ── Playground ────────────────────────────────────────────
@@ -67,8 +67,14 @@ return [
 
     // ── Features ──────────────────────────────────────────────
     'features.eyebrow' => "What's included",
-    'features.title'   => 'Engineered for clarity',
+    'features.title'   => 'Engineered to ship fast',
     'features.empty'   => 'No features found.',
+
+    'features.scaffold.name' => 'Full CRUD in One Command',
+    'features.scaffold.desc' => 'luany make:feature Product name:string price:decimal — generates model, controller, migration, 4 views and routes. Ready to run in seconds.',
+
+    'features.lde.name' => 'Dev Engine (LDE)',
+    'features.lde.desc' => 'Zero-proxy live reload. CSS injected instantly, PHP/LTE reloaded clean. WebSocket carries only signals — no loops, no session corruption.',
 
     'features.ast.name' => 'AST Template Engine',
     'features.ast.desc' => 'LTE compiles via AST — zero regex, predictable output, collocated CSS and JS with @style and @script blocks.',
@@ -82,19 +88,25 @@ return [
     'features.csrf.name' => 'CSRF Protection',
     'features.csrf.desc' => 'Automatic token verification on every state-changing request. One @csrf directive in your form — done.',
 
+    'features.orm.name' => 'Active Record ORM',
+    'features.orm.desc' => 'Fluent QueryBuilder, relations (hasOne, hasMany, belongsTo), SoftDeletes, eager loading and migrations — all built in. Zero external dependencies.',
+
+    'features.validation.name' => 'Validation Engine',
+    'features.validation.desc' => 'validate() in one line — required, email, unique, confirmed, min/max and more. Redirects back with errors and old input automatically.',
+
     // ── Next Steps ────────────────────────────────────────────
     'nextsteps.eyebrow'  => 'CLI Reference',
     'nextsteps.title'    => "What's next?",
-    'nextsteps.lead'     => 'Your environment is wired. Run these to scaffold your first feature.',
+    'nextsteps.lead'     => 'Your environment is wired. These four commands get you from zero to a running feature.',
 
-    'nextsteps.cmd1'  => 'luany make:controller Name',
-    'nextsteps.desc1' => 'Scaffold a new controller in app/Controllers/',
-    'nextsteps.cmd2'  => 'luany make:model Name',
-    'nextsteps.desc2' => 'Create a model class in app/Models/',
-    'nextsteps.cmd3'  => 'luany make:migration name',
-    'nextsteps.desc3' => 'Generate a timestamped migration file',
-    'nextsteps.cmd4'  => 'luany migrate',
-    'nextsteps.desc4' => 'Run all pending database migrations',
+    'nextsteps.cmd1'  => 'luany make:feature Product name:string price:decimal',
+    'nextsteps.desc1' => 'Full CRUD — model, controller, migration, 4 views, routes',
+    'nextsteps.cmd2'  => 'luany migrate',
+    'nextsteps.desc2' => 'Run all pending database migrations',
+    'nextsteps.cmd3'  => 'luany route:list',
+    'nextsteps.desc3' => 'Display all registered application routes',
+    'nextsteps.cmd4'  => 'luany dev',
+    'nextsteps.desc4' => 'Start the dev server with live reload',
 
     'nextsteps.docs'    => 'Read the Docs →',
     'nextsteps.github'  => 'View on GitHub',

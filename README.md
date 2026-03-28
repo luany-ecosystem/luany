@@ -10,9 +10,9 @@ Official application skeleton for the Luany Framework.
 
 - PHP 8.2+
 - Composer 2.0+
+- Node.js (required for live reload via `luany dev`)
 
 ## Installation
-
 ```bash
 composer global require luany/cli
 luany new my-app
@@ -20,15 +20,13 @@ cd my-app
 ```
 
 Or directly via Composer:
-
 ```bash
 composer create-project luany/luany my-app
 cd my-app
 ```
 
 ## Getting started
-
-````bash
+```bash
 # 1. Configure your database
 #    Edit DB_HOST, DB_NAME, DB_USER, DB_PASS in .env
 
@@ -38,22 +36,25 @@ luany doctor
 # 3. Run migrations
 luany migrate
 
+# 4. Install Node.js dependencies (required for live reload)
+npm install
+```
+
 ## Development
 ```bash
-luany serve
-````
+luany dev
+```
 
-Open `http://localhost:8000`.
+Starts the **Luany Dev Engine (LDE)** — PHP server + WebSocket live reload. Open `http://localhost:8000`.
+
+> Use `luany serve` for a plain PHP server without live reload.
 
 ## luany dev
-
 ```bash
 luany dev
 luany dev localhost 8080          # custom host/port
 luany dev localhost 8000 35730    # custom WebSocket port
 ```
-
-Starts the **Luany Dev Engine (LDE)** — the integrated development server with live reload.
 
 | Process | Address | Role |
 |---|---|---|
@@ -70,11 +71,10 @@ Starts the **Luany Dev Engine (LDE)** — the integrated development server with
 ### Requirements
 
 - Node.js installed and available on `PATH`
-- `npm install` run inside the project (installs `chokidar` and `ws`)
-- `APP_ENV=development` in `.env` (required for `DevMiddleware` to inject the client)
+- `npm install` run inside the project
+- `APP_ENV=development` in `.env`
 
 ### How it works
-
 ```
 Browser ←──────────────────→ PHP   (port 8000) — direct, no proxy
 Browser ←── WebSocket ──────→ Node (port 35729) — reload signals only
@@ -82,10 +82,7 @@ Browser ←── WebSocket ──────→ Node (port 35729) — reload s
 
 `DevMiddleware` intercepts every HTML response and appends the LDE browser client script. The client connects to the WebSocket server started by `luany dev` and applies changes as they arrive.
 
-> **Note:** `luany serve` continues to work as a plain PHP server without live reload. Use `luany dev` for active development.
-
 ## Directory structure
-
 ```
 my-app/
 ├── app/
@@ -126,14 +123,12 @@ my-app/
 ## Key concepts
 
 **Routing** — defined in `routes/http.php`:
-
 ```php
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 ```
 
 **Controllers** — extend the base `Controller`:
-
 ```php
 class HomeController extends Controller
 {
@@ -145,7 +140,6 @@ class HomeController extends Controller
 ```
 
 **Views** — LTE template engine, stored in `views/`:
-
 ```lte
 @extends('layouts.main')
 
@@ -157,7 +151,6 @@ class HomeController extends Controller
 ```
 
 **Migrations** — in `database/migrations/`:
-
 ```php
 class CreateUsersTable extends Migration
 {
@@ -174,7 +167,6 @@ class CreateUsersTable extends Migration
 ```
 
 **Models** — ActiveRecord base:
-
 ```php
 class User extends Model
 {
@@ -185,7 +177,6 @@ class User extends Model
 ```
 
 ## CLI reference
-
 ```bash
 luany make:controller <Name>      # scaffold controller
 luany make:model <Name>           # scaffold model
@@ -203,7 +194,8 @@ luany migrate:fresh               # drop all and re-migrate
 luany key:generate                # regenerate APP_KEY
 luany cache:clear                 # clear compiled views
 luany doctor                      # environment health check
-luany serve                       # start dev server
+luany serve                       # start PHP server (no live reload)
+luany dev                         # start dev server with live reload
 ```
 
 ## Documentation
