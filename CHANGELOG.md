@@ -6,6 +6,28 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.0.1] — 2026-03-24
+
+### Added
+- `app/Http/Middleware/DevMiddleware.php` — development-only middleware. Zero-cost passthrough in production (`APP_ENV !== development` fast-path). Two responsibilities:
+  1. Serves `/__luany_dev/client.js` directly (no route registration required).
+  2. Injects `<script src="/__luany_dev/client.js" defer></script>` before `</body>` in every 2xx HTML response.
+  Only injects into `text/html` responses — JSON, redirects, downloads are never touched.
+
+### Changed
+- `app/Http/Kernel.php` — `DevMiddleware` registered as the **first** global middleware (outermost position), ensuring it wraps the complete pipeline and receives the final rendered `Response` before `send()`.
+- `package.json` — replaced BrowserSync with Luany Dev Engine:
+  - `"dev"` script: `"luany dev"` (previously `concurrently + browser-sync --proxy`)
+  - `devDependencies`: `chokidar ^3.6.0` + `ws ^8.18.0` (previously `browser-sync ^3.0.0` + `concurrently ^9.0.0`)
+
+### Fixed
+- Eliminated BrowserSync proxy (`--proxy localhost:8000`) which caused request loops, session state inconsistency between ports 3000/8000, and unstable reload behaviour.
+
+### Architecture
+- Browser now connects directly to PHP on port 8000 — no proxy layer.
+- Live reload signals delivered via WebSocket on port 35729 (LDE watcher).
+- CSS changes inject without page reload. PHP/LTE/JS changes trigger a clean full reload.
+
 ## [1.0.0] — 2026-03-22
 
 ### Added

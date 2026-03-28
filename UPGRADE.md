@@ -50,4 +50,45 @@ Internal routing loading is now auto-discovered (no $routesFile override)
 [ ] Run: npm install (for live reload support)
 [ ] Ensure PHP 8.2+ is installed
 
+## Development Server — npm run dev → luany dev
+
+BrowserSync has been replaced by the Luany Dev Engine (LDE). The proxy
+layer has been removed — the browser now connects directly to PHP.
+
+**Install Node.js dependencies:**
+```bash
+npm install
+```
+
+**Start the dev server:**
+```bash
+# Before (BrowserSync)
+npm run dev
+
+# After (LDE)
+luany dev
+```
+
+**Update `.env`:**
+```
+APP_ENV=development
+```
+
+**Register `DevMiddleware` in `app/Http/Kernel.php`:**
+```php
+protected array $middleware = [
+    DevMiddleware::class,    // FIRST — wraps the full pipeline
+    LocaleMiddleware::class,
+    CsrfMiddleware::class,
+];
+```
+
+`DevMiddleware` is a zero-cost passthrough in production — no need to
+remove it before deploying.
+
+- [ ] Run: `npm install`
+- [ ] Set `APP_ENV=development` in `.env`
+- [ ] Add `DevMiddleware::class` as first entry in `Kernel::$middleware`
+- [ ] Replace `npm run dev` with `luany dev` in your workflow
+
 ---

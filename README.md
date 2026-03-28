@@ -45,16 +45,44 @@ luany serve
 
 Open `http://localhost:8000`.
 
-For automatic browser reload during development:
+## luany dev
 
 ```bash
-npm install
-npm run dev
+luany dev
+luany dev localhost 8080          # custom host/port
+luany dev localhost 8000 35730    # custom WebSocket port
 ```
 
-Open `http://localhost:3000`.
+Starts the **Luany Dev Engine (LDE)** — the integrated development server with live reload.
 
-Starts the PHP server and enables live reload via BrowserSync — views and assets reload automatically on change.```
+| Process | Address | Role |
+|---|---|---|
+| PHP built-in server | `http://localhost:8000` | Serves the application directly |
+| WebSocket server | `ws://localhost:35729` | Delivers reload signals to the browser |
+
+### Live reload strategy
+
+| File changed | Action |
+|---|---|
+| `*.css` | Inject — updates `<link>` href with cache-buster. No page reload. |
+| `*.lte` / `*.php` / `*.js` | Full page reload |
+
+### Requirements
+
+- Node.js installed and available on `PATH`
+- `npm install` run inside the project (installs `chokidar` and `ws`)
+- `APP_ENV=development` in `.env` (required for `DevMiddleware` to inject the client)
+
+### How it works
+
+```
+Browser ←──────────────────→ PHP   (port 8000) — direct, no proxy
+Browser ←── WebSocket ──────→ Node (port 35729) — reload signals only
+```
+
+`DevMiddleware` intercepts every HTML response and appends the LDE browser client script. The client connects to the WebSocket server started by `luany dev` and applies changes as they arrive.
+
+> **Note:** `luany serve` continues to work as a plain PHP server without live reload. Use `luany dev` for active development.
 
 ## Directory structure
 
