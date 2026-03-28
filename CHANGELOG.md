@@ -6,6 +6,44 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.1.0] — 2026-03-28
+
+### Added
+- `app/Http/Middleware/DevMiddleware.php` — development-only middleware. Zero-cost passthrough in production (`APP_ENV !== development` fast-path). Two responsibilities:
+  1. Serves `/__luany_dev/client.js` directly (no route registration required).
+  2. Injects `<script src="/__luany_dev/client.js" defer></script>` before `</body>` in every 2xx HTML response.
+  Only injects into `text/html` responses — JSON, redirects, downloads are never touched.
+- LDE feature card added to home page — showcases live reload capability to new developers.
+- Feature scaffolding (`make:feature`) highlighted in home page features and next steps sections.
+
+### Changed
+- `app/Http/Kernel.php` — `DevMiddleware` registered as the **first** global middleware (outermost position), ensuring it wraps the complete pipeline and receives the final rendered `Response` before `send()`.
+- `package.json` — replaced BrowserSync with Luany Dev Engine:
+  - `"dev"` script: `"luany dev"` (previously `concurrently + browser-sync --proxy`)
+  - `devDependencies`: `chokidar ^3.6.0` + `ws ^8.18.0` (previously `browser-sync ^3.0.0` + `concurrently ^9.0.0`)
+- Development architecture: browser now connects directly to PHP on port 8000 — no proxy layer. Live reload signals delivered via WebSocket on port 35729. CSS changes inject without page reload; PHP/LTE/JS changes trigger a clean full reload.
+- Home page "Next steps" section updated — `luany dev` added as the development server command.
+- Home page features section expanded from 4 to 6 cards (Dev Engine + Feature Scaffolding added).
+- Page title handling simplified in `views/pages/home.lte` — removed redundant `$title ??` fallback.
+
+### Fixed
+- `hero.stat_tests` translation key was returning a numeric value instead of a label, causing `63 252` to render in the hero stats. Corrected to return `"tests"` / `"testes"`.
+- Hero test count updated from `63` to `176` to reflect the current test suite.
+- `hero.eyebrow` translation exposed `APP_ENV=development` in production UI. Replaced with `"v1.0 — Open source · MIT License"`.
+- Various EN/PT translation inconsistencies corrected.
+
+### Removed
+- BrowserSync-based development workflow (`npm run dev` with `--proxy localhost:8000`).
+- `browser-sync ^3.0.0` and `concurrently ^9.0.0` from `devDependencies`.
+- Proxy layer between browser and PHP server — eliminated request loops, port conflicts (3000/8000), and session state corruption.
+
+### Breaking Changes
+- `npm run dev` (BrowserSync) replaced by `luany dev` (Luany Dev Engine).
+- Node.js is now required for live reload (`chokidar` and `ws` via `npm install`).
+- `APP_ENV=development` must be set in `.env` for `DevMiddleware` to activate.
+
+---
+
 ## [1.0.0] — 2026-03-22
 
 ### Added
@@ -22,6 +60,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ### Breaking Changes
 - PHP 8.1 is no longer supported
+
 ---
 
 ## [0.2.0] — Initial skeleton
