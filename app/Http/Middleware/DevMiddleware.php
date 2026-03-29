@@ -90,24 +90,21 @@ class DevMiddleware implements MiddlewareInterface
     /**
      * Serve the LDE browser client JavaScript file.
      *
-     * Searches two locations:
-     *   1. vendor/luany/cli/...  — normal composer install
-     *   2. ../../luany-cli/...   — monorepo / local development of Luany itself
-     *
      * Returns 200 with the file content, or a 404 JS comment if not found.
      */
     private function serveClientScript(): Response
     {
         $paths = [
-            // 1. Vendor — normal composer install / composer global require
-            base_path('/vendor/luany/cli/src/Resources/dev/client.js'),
+            // 1. Injectado pelo ProcessManager via putenv()
+            //    quando o servidor foi arrancado por `luany dev`
+            getenv('LDE_CLIENT_PATH') ?: '',
 
-            // 2. Monorepo — local development of the Luany ecosystem itself
-            dirname(base_path(), 2) . '/luany-cli/src/Resources/dev/client.js',
+            // 2. Fallback — CLI instalado como dependência de projecto
+            base_path('/vendor/luany/cli/src/Resources/dev/client.js'),
         ];
 
         foreach ($paths as $fullPath) {
-            if (file_exists($fullPath)) {
+            if ($fullPath && file_exists($fullPath)) {
                 return Response::make(file_get_contents($fullPath), 200)
                     ->header('Content-Type', 'application/javascript; charset=UTF-8')
                     ->header('Cache-Control', 'no-store');
@@ -115,7 +112,7 @@ class DevMiddleware implements MiddlewareInterface
         }
 
         return Response::make(
-            '// LDE client not found. Run: composer require --dev luany/cli',
+            '// LDE client not found. Run: luany dev',
             404
         )->header('Content-Type', 'application/javascript; charset=UTF-8');
     }

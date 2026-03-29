@@ -6,6 +6,11 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.1.1] - 2026-03-29
+
+### Fixed
+- Fix DevMiddleware failing to locate LDE client script by resolving path via `LDE_CLIENT_PATH` environment variable.
+
 ## [1.1.0] — 2026-03-28
 
 ### Added
