@@ -6,6 +6,18 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.1.2] — 2026-04-11
+
+### Added
+
+- `database/seeders/DatabaseSeeder.php` — entry point for all seeders. Calls `UserSeeder` via `$this->call()`. Run with `luany db:seed`.
+- `database/seeders/UserSeeder.php` — example seeder corresponding to the default `users` table. Inserts two example records using `INSERT IGNORE` (safe to re-run).
+- `app/Models/User.php` — Active Record model corresponding to the default `users` migration. `$fillable = ['name', 'email']`. No auth assumptions.
+
+### Changed
+
+- `database/migrations/2026_01_01_000000_create_users_table.php` — removed `password` and `updated_at` columns. The default skeleton does not include authentication. Table now has only `id`, `name`, `email`, `created_at` — a clean, honest example that matches `User.php`.
+
 ## [1.1.1] - 2026-03-29
 
 ### Fixed
