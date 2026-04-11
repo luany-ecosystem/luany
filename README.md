@@ -101,6 +101,7 @@ my-app/
 │   └── mail.php
 ├── database/
 │   └── migrations/
+│   └── seeders/
 ├── lang/
 │   ├── en.php
 │   └── pt.php
@@ -181,6 +182,9 @@ class User extends Model
 luany make:controller <Name>      # scaffold controller
 luany make:model <Name>           # scaffold model
 luany make:migration <name>       # generate migration file
+luany make:seeder <Name>          # scaffold seeder class
+luany db:seed                     # run database seeders
+luany migrate:fresh --seed        # drop, migrate and seed
 luany make:middleware <Name>      # scaffold middleware
 luany make:view <name> [type]     # create LTE view
 luany make:feature <Name>         # scaffold full CRUD feature

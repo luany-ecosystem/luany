@@ -22,96 +22,12 @@ return [
     'theme.to_dark'  => 'Mudar para modo escuro',
 
     // ── Hero ──────────────────────────────────────────────────
-    'hero.eyebrow'       => 'v1.0 — Compilador-driven · Zero magia · MIT',
+    'hero.eyebrow'       => 'v1.0 — Nível Compilador · Zero magia · MIT',
     'hero.title_line1'   => 'A tua aplicação está em',
     'hero.title_accent'  => 'execução.',
     'hero.subtitle'      => 'Crie um CRUD completo em 10 segundos.<br>Tudo é explícito — começa a construir.',
     'hero.cta_primary'   => 'Ler a Documentação →',
     'hero.cta_secondary' => 'GitHub',
-    'hero.stat_regex'    => 'regex',
-    'hero.stat_tests'    => 'testes',
-    'hero.stat_compiler' => 'compilador',
-
-    // ── Playground ────────────────────────────────────────────
-    'playground.eyebrow'       => 'Motor de Templates LTE',
-    'playground.title'         => 'Vê o compilador em acção',
-    'playground.lead'          => 'O LTE analisa templates numa AST e emite PHP optimizado. Zero regex. Output determinístico.',
-    'playground.tab_foreach'   => '&#64;foreach',
-    'playground.tab_escape'    => '&#123;&#123; &#125;&#125; vs &#123;!! !!&#125;',
-    'playground.tab_compiled'  => 'PHP Compilado',
-    'playground.lte_template'  => 'Template LTE',
-    'playground.lte_source'    => 'Fonte LTE',
-    'playground.server_output' => 'Saída do Servidor',
-    'playground.php_rendered'  => 'renderizado em PHP',
-    'playground.compiled_php'  => 'PHP Compilado',
-    'playground.no_users'      => 'Nenhum utilizador encontrado.',
-
-    // ── Pipeline ──────────────────────────────────────────────
-    'pipeline.eyebrow' => 'Ciclo de Vida do Request',
-    'pipeline.title'   => 'Explícito por design',
-
-    'pipeline.step1.name' => 'Request::fromGlobals()',
-    'pipeline.step1.desc' => 'Superglobais PHP capturados num objecto Request tipado e imutável. Método, URI, headers, body — tudo normalizado.',
-
-    'pipeline.step2.name' => 'Pipeline de Middleware Global',
-    'pipeline.step2.desc' => 'Cada request passa pelo middleware global antes do routing. Interrupção antecipada em qualquer ponto. CSRF, autenticação, rate limiting — tudo aqui.',
-
-    'pipeline.step3.name' => 'Route::handle()',
-    'pipeline.step3.desc' => 'O Router faz correspondência do método + URI. Rotas nomeadas, grupos, rotas resource, pipeline de middleware por rota — tudo resolvido aqui.',
-
-    'pipeline.step4.name' => 'Controller → Motor LTE',
-    'pipeline.step4.desc' => 'O Controller retorna um valor. O LTE compila a view via AST, faz cache do PHP compilado. Auto-reload em debug, cache persistente em produção.',
-
-    'pipeline.step5.name' => 'Response::send()',
-    'pipeline.step5.desc' => 'Response tipado com código de status, headers e body. Send envia para o cliente. Kernel::terminate() executa a limpeza pós-envio.',
-
-    // ── Features ──────────────────────────────────────────────
-    'features.eyebrow' => 'O que está incluído',
-    'features.title'   => 'Construído para entregar rápido',
-    'features.empty'   => 'Nenhuma funcionalidade encontrada.',
-
-    'features.scaffold.name' => 'CRUD Completo num Comando',
-    'features.scaffold.desc' => 'luany make:feature Product name:string price:decimal — gera model, controller, migração, 4 views e rotas. Pronto a correr em segundos.',
-
-    'features.lde.name' => 'Dev Engine (LDE)',
-    'features.lde.desc' => 'Live reload sem proxy. CSS injectado instantaneamente, PHP/LTE recarregado limpo. WebSocket transporta apenas sinais — sem loops, sem corrupção de sessão.',
-
-    'features.ast.name' => 'Motor de Templates AST',
-    'features.ast.desc' => 'O LTE compila via AST — zero regex, output previsível, CSS e JS colocalizados com blocos @style e @script.',
-
-    'features.pipeline.name' => 'Pipeline de Middleware',
-    'features.pipeline.desc' => 'Ciclo de vida do request explícito. Middleware global e por rota com suporte total a interrupção antecipada. Sem magia.',
-
-    'features.providers.name' => 'Service Providers',
-    'features.providers.desc' => 'Ciclo de boot em duas fases. Todos os register() completam antes de qualquer boot() — dependências entre provedores sempre seguras.',
-
-    'features.csrf.name' => 'Protecção CSRF',
-    'features.csrf.desc' => 'Verificação automática de token em cada request que altera estado. Uma directiva @csrf no formulário — pronto.',
-
-    'features.orm.name' => 'ORM Active Record',
-    'features.orm.desc' => 'QueryBuilder fluente, relações (hasOne, hasMany, belongsTo), SoftDeletes, eager loading e migrações — tudo incluído. Zero dependências externas.',
-
-    'features.validation.name' => 'Motor de Validação',
-    'features.validation.desc' => 'validate() numa linha — required, email, unique, confirmed, min/max e mais. Redireciona com erros e input anterior automaticamente.',
-
-
-    // ── Next Steps ────────────────────────────────────────────
-    'nextsteps.eyebrow'  => 'Referência CLI',
-    'nextsteps.title'    => 'O que vem a seguir?',
-    'nextsteps.lead'     => 'O teu ambiente está pronto. Estes quatro comandos levam-te do zero a uma feature a correr.',
-
-    'nextsteps.cmd1'  => 'luany make:feature Product name:string price:decimal',
-    'nextsteps.desc1' => 'CRUD completo — model, controller, migração, 4 views, rotas',
-    'nextsteps.cmd2'  => 'luany migrate',
-    'nextsteps.desc2' => 'Executa todas as migrações pendentes',
-    'nextsteps.cmd3'  => 'luany route:list',
-    'nextsteps.desc3' => 'Lista todas as rotas registadas',
-    'nextsteps.cmd4'  => 'luany dev',
-    'nextsteps.desc4' => 'Inicia o servidor com live reload',
-
-    'nextsteps.docs'    => 'Ler a Documentação →',
-    'nextsteps.github'  => 'Ver no GitHub',
-    'nextsteps.version' => 'luany/framework v1.0 · Licença MIT',
 
     // ── Footer ────────────────────────────────────────────────
     'footer.tagline'       => 'Framework PHP MVC compilada em AST.<br>Ciclo de vida explícito. Zero regex.',

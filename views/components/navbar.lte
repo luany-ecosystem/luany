@@ -3,7 +3,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(1, 2, 19, 0.88);
+    background: var(--luany-dark-dark);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--color-border);
@@ -177,7 +177,7 @@
         display: none;
         position: absolute;
         top: 64px; left: 0; right: 0;
-        background: rgba(8, 11, 31, 0.97);
+        background: var(--luany-dark-dark);
         backdrop-filter: blur(16px);
         flex-direction: column;
         align-items: flex-start;
@@ -208,8 +208,11 @@
 
         <ul class="navbar-menu" id="navbarMenu" role="list">
             <li><a href="{{ url('/') }}"    class="navbar-link">{{ __('nav.home') }}</a></li>
-            <li><a href="{{ url('docs') }}" class="navbar-link">{{ __('nav.docs') }}</a></li>
             <li>
+                <a href="https://github.com/luany-ecosystem/docs" class="navbar-link" target="_blank">
+                    {{ __('nav.docs') }}
+                </a>
+            </li>
                 <a href="https://github.com/luany-ecosystem"
                    class="navbar-link-pill"
                    target="_blank"
