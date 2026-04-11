@@ -10,14 +10,6 @@ class HomeController extends Controller
     {
         return view('pages.home', [
             'title' => env('APP_NAME', 'Luany'),
-            'users' => [
-                ['name' => 'António Ngola'],
-                ['name' => 'Luany António'],
-                ['name' => 'Kelson Filipe'],
-                ['name' => 'Adário Muatelembe'],
-            ],
-            'unsafe' => '<script>alert("xss")</script>',
-            'html'   => '<strong style="color:var(--luany-orange)">Bold HTML</strong> rendered raw',
         ]);
     }
 }

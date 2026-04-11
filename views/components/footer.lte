@@ -156,7 +156,7 @@
             <div class="footer-col">
                 <p class="footer-col-title">{{ __('footer.col_resources') }}</p>
                 <ul class="footer-col-links">
-                    <li><a href="{{ url('docs') }}">{{ __('footer.docs') }}</a></li>
+                    <li><a href="https://github.com/luany-ecosystem/docs" target="_blank">{{ __('footer.docs') }}</a></li>
                     <li><a href="https://packagist.org/packages/luany/" target="_blank" rel="noopener noreferrer">{{ __('footer.packagist') }}</a></li>
                     <li><a href="https://github.com/luany-ecosystem/luany/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">{{ __('footer.changelog') }}</a></li>
                     <li><a href="https://github.com/luany-ecosystem/luany/issues" target="_blank" rel="noopener noreferrer">{{ __('footer.issues') }}</a></li>
