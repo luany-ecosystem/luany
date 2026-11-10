@@ -6,6 +6,21 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased] — 1.2.0
+
+### Security
+- **CSRF fixed (#2).** The app middleware now extends `Luany\Framework\Http\Middleware\CsrfMiddleware`: one token per session (`_csrf_token`), accepted from the `_token` field (`@csrf`, `csrf_field()`), the legacy `csrf_token` field or the `X-CSRF-TOKEN` header. Forms using `csrf_field()` no longer get 419, and the token is no longer rotated on every POST (multi-tab and concurrent AJAX work). Mismatch still returns 419.
+- Locale switch redirects only to a same-host `Referer` (no open redirect); locale cookie is `Secure` on HTTPS (#3).
+- LDE live-reload client is only served to loopback clients (#3).
+- `.htaccess`: no hard-coded `RewriteBase`, dotfiles denied, `Authorization` forwarded, modern security headers (#3).
+
+### Changed
+- Requires `luany/framework ^1.1` and `luany/database ^1.2`.
+- `csrf_field()` now comes from luany/framework (field name `_token`).
+- README: production deployment checklist.
+
+---
+
 ## [1.1.2] — 2026-04-11
 
 ### Added

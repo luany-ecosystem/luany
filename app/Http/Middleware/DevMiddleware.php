@@ -47,7 +47,7 @@ class DevMiddleware implements MiddlewareInterface
         // ── Production fast-path ───────────────────────────────────────────────
         // Check all possible sources the Luany framework may use to populate
         // env vars from .env (putenv → getenv, $_ENV, $_SERVER).
-        if (!$this->isDevelopment()) {
+        if (!$this->isDevelopment() || !$this->isLocalRequest($request)) {
             return $next($request);
         }
 
@@ -77,6 +77,17 @@ class DevMiddleware implements MiddlewareInterface
      * Checking all three guarantees we detect development mode regardless
      * of the php.ini variables_order configuration.
      */
+    /**
+     * LDE is only ever served to loopback clients, so a server accidentally
+     * deployed with APP_ENV=development does not expose the dev client.
+     */
+    private function isLocalRequest(Request $request): bool
+    {
+        $ip = (string) $request->server('REMOTE_ADDR', '');
+
+        return $ip === '127.0.0.1' || $ip === '::1' || str_starts_with($ip, '127.');
+    }
+
     private function isDevelopment(): bool
     {
         $env = $_ENV['APP_ENV']

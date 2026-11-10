@@ -54,16 +54,6 @@ if (!function_exists('e')) {
     }
 }
 
-if (!function_exists('csrf_field')) {
-    /**
-     * Generate a hidden CSRF input field.
-     * Uses the csrf_token() helper from luany/framework.
-     */
-    function csrf_field(): string
-    {
-        return '<input type="hidden" name="csrf_token" value="' . csrf_token() . '">';
-    }
-}
 
 // ── Flash messages ────────────────────────────────────────────────────────────
 
