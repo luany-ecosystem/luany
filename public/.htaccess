@@ -1,8 +1,14 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Dynamic base — works in any subdirectory
-    RewriteBase /
+    # No RewriteBase: rules are relative to this directory, so the app works
+    # at the domain root or in a sub-directory. If your host requires one,
+    # uncomment and set it to the public URL path, e.g. "RewriteBase /myapp/".
+    # RewriteBase /
+
+    # Pass the Authorization header to PHP (needed for API tokens on some hosts)
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Serve real files and directories directly
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -15,8 +21,19 @@
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"
-    Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+    # Enable once the site is served over HTTPS only:
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    # Tighten to your needs (inline scripts/styles require nonces or hashes):
+    # Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; frame-ancestors 'self'"
 </IfModule>
+
+# Never serve dotfiles (.env, .git, ...) even if they end up in public/
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
 
 Options -Indexes

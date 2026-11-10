@@ -202,6 +202,19 @@ luany serve                       # start PHP server (no live reload)
 luany dev                         # start dev server with live reload
 ```
 
+## Deploying to production
+
+Checklist before going live:
+
+1. `.env`: `APP_ENV=production`, `APP_DEBUG=false`, `APP_HTTPS=true` (when served over HTTPS) and a real `APP_URL`.
+2. Point the web server's document root at `public/` — never at the project root.
+3. `composer install --no-dev --optimize-autoloader`.
+4. Make `storage/` writable by the web server user only.
+5. Behind a load balancer / reverse proxy, configure trusted proxies so client IPs and HTTPS detection are correct.
+6. Review the security headers in `public/.htaccess` (enable HSTS once HTTPS-only; add a Content-Security-Policy).
+
+The live-reload client (LDE) is only injected when `APP_ENV=development` **and** the request comes from the loopback interface.
+
 ## Documentation
 
 [docs.luany.dev](https://docs.luany.dev)
