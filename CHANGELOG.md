@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased] — 1.2.0
+## [1.2.0] — 2026-11-10
 
 ### Security
 - **CSRF fixed (#2).** The app middleware now extends `Luany\Framework\Http\Middleware\CsrfMiddleware`: one token per session (`_csrf_token`), accepted from the `_token` field (`@csrf`, `csrf_field()`), the legacy `csrf_token` field or the `X-CSRF-TOKEN` header. Forms using `csrf_field()` no longer get 419, and the token is no longer rotated on every POST (multi-tab and concurrent AJAX work). Mismatch still returns 419.
