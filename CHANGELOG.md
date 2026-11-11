@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased] — 1.4.0
+## [1.4.0] — 2026-11-11
 
 A clean starting point: everything that was demonstration or framework code is gone.
 
