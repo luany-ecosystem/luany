@@ -30,6 +30,11 @@ echo "\n  \033[32m✓\033[0m  .env created with a new APP_KEY\n";
 if ($usesSqlite) {
     echo "  \033[32m✓\033[0m  SQLite database ready (change DB_CONNECTION in .env for MySQL / PostgreSQL)\n";
 }
+// `luany new` prints its own summary.
+if (getenv('LUANY_CLI')) {
+    exit(0);
+}
+
 echo "\n  Next:\n";
 echo "    luany migrate     create the tables\n";
 echo "    luany dev         start the server with live reload  →  http://localhost:8000\n\n";
