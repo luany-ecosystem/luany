@@ -6,6 +6,13 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased] — 1.4.1
+
+### Fixed
+- The post-install script leaves the next steps to `luany new` (when `LUANY_CLI` is set), so they are not printed twice.
+
+---
+
 ## [1.4.0] — 2026-11-11
 
 A clean starting point: everything that was demonstration or framework code is gone.
