@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased] — 1.3.0
+## [1.3.0] — 2026-11-11
 
 ### Changed
 - Requires `luany/framework ^1.2` (method injection in controllers, `exists` / update-safe `unique` rules wired to the app database, `abort()` through the app Handler) and `luany/database ^1.4` (model queries, scopes, casts, timestamps, joins, aggregates, many-to-many, nested eager loading).
