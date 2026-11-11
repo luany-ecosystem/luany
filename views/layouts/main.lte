@@ -4,27 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', env('APP_NAME', 'Luany'))</title>
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/icon/luany.svg') }}">
+    <title>@yield('title', config('app.name'))</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url('favicon.svg') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script>/* anti-FOUC */(function(){var t=localStorage.getItem('luany-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());</script>
-    @stack('head')
     @styles
+    @stack('head')
 </head>
 <body>
-
-    @include('components.navbar')
     @include('components.flash')
 
-    <main class="main-content">
+    <main>
         @yield('content')
     </main>
 
-    @include('components.footer')
-
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     @scripts
     @stack('scripts')
-
 </body>
 </html>

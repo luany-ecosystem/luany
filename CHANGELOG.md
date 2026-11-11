@@ -6,6 +6,30 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased] — 1.4.0
+
+A clean starting point: everything that was demonstration or framework code is gone.
+
+### Changed
+- **SQLite by default** — `DB_CONNECTION=sqlite`, `DB_NAME=database/database.sqlite`; the post-install script creates the file. MySQL and PostgreSQL via `DB_CONNECTION=mysql|pgsql`.
+- `DatabaseServiceProvider` supports `DB_CONNECTION` (sqlite path relative to the project).
+- Users migration uses the portable schema builder (anonymous class); the `User` model enables timestamps.
+- Minimal views: one layout, a welcome page, `errors/404` and `errors/500`, a flash component; a single small stylesheet with light/dark support; a 164-byte SVG favicon.
+- `App\Http\Kernel` uses the framework's `LiveReloadMiddleware`.
+- `App\Exceptions\Handler` renders `views/errors/{404,500}.lte` (debug page for 5xx in debug mode).
+- Requires `luany/framework ^1.3` and `luany/database ^1.7`.
+- README reduced to getting started; details live in the documentation.
+
+### Added
+- `phpunit.xml`, a home page feature test, `composer test`; CI runs the tests.
+
+### Removed
+- Demo homepage, navbar and footer, locale switcher (controller, middleware, route, `lang/` demo strings), demo user seeder, `config/mail.php` (unused), `UPGRADE.md`, 656 KB of logo images.
+- `app/Support/helpers.php` and `DevMiddleware` — now provided by luany/framework (`url()`, `route()`, `asset()`, `e()`, `flash()`, `get_flash()`, `LiveReloadMiddleware`).
+- Translator binding and timezone/constant setup in `AppServiceProvider` — handled by the framework Kernel.
+
+---
+
 ## [1.3.0] — 2026-11-11
 
 ### Changed
