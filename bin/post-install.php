@@ -1,16 +1,9 @@
 <?php
 
 /**
- * post-install.php
- *
- * Runs automatically after `composer create-project luany/luany my-app`.
- * Responsible for:
- *   - Copying .env.example → .env
- *   - Generating a secure APP_KEY
- *   - Displaying the welcome screen
+ * Runs after `composer create-project luany/luany`:
+ * creates .env with a fresh APP_KEY and the SQLite database file.
  */
-
-// ── .env ──────────────────────────────────────────────────────────────────────
 
 if (!file_exists('.env')) {
     if (!file_exists('.env.example')) {
@@ -20,29 +13,23 @@ if (!file_exists('.env')) {
     copy('.env.example', '.env');
 }
 
-// ── APP_KEY ───────────────────────────────────────────────────────────────────
+$env = (string) file_get_contents('.env');
+$env = (string) preg_replace('/^APP_KEY=.*$/m', 'APP_KEY=base64:' . base64_encode(random_bytes(32)), $env);
+file_put_contents('.env', $env);
 
-$key     = 'base64:' . base64_encode(random_bytes(32));
-$content = file_get_contents('.env');
-$content = preg_replace('/^APP_KEY=.*/m', 'APP_KEY=' . $key, $content);
-file_put_contents('.env', $content);
+$usesSqlite = preg_match('/^DB_CONNECTION=sqlite\s*$/m', $env) === 1;
+if ($usesSqlite && preg_match('/^DB_NAME=(.+)$/m', $env, $m) === 1) {
+    $file = trim($m[1], " \t\"'");
+    if ($file !== ':memory:' && !file_exists($file)) {
+        @mkdir(dirname($file), 0755, true);
+        touch($file);
+    }
+}
 
-// ── Welcome ───────────────────────────────────────────────────────────────────
-
-echo "\n";
-echo "  \033[38;5;55m██╗     ██╗   ██╗ █████╗ ███╗   ██╗██╗   ██╗\033[0m\n";
-echo "  \033[38;5;55m██║     ██║   ██║██╔══██╗████╗  ██║╚██╗ ██╔╝\033[0m\n";
-echo "  \033[38;5;55m██║     ██║   ██║███████║██╔██╗ ██║ ╚████╔╝ \033[0m\n";
-echo "  \033[38;5;55m██║     ██║   ██║██╔══██║██║╚██╗██║  ╚██╔╝  \033[0m\n";
-echo "  \033[38;5;55m███████╗╚██████╔╝██║  ██║██║ ╚████║   ██║   \033[0m\n";
-echo "  \033[38;5;55m╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝  \033[0m\n";
-echo "\n";
-echo "  \033[32m✓\033[0m  .env created\n";
-echo "  \033[32m✓\033[0m  Application key set\n";
-echo "\n";
-echo "  \033[38;5;208mNext steps:\033[0m\n";
-echo "    Configure database    →  \033[36m.env\033[0m\n";
-echo "    Check environment     →  \033[36mluany doctor\033[0m\n";
-echo "    Run migrations        →  \033[36mluany migrate\033[0m\n";
-echo "    Start dev server      →  \033[36mluany serve\033[0m\n";
-echo "\n";
+echo "\n  \033[32m✓\033[0m  .env created with a new APP_KEY\n";
+if ($usesSqlite) {
+    echo "  \033[32m✓\033[0m  SQLite database ready (change DB_CONNECTION in .env for MySQL / PostgreSQL)\n";
+}
+echo "\n  Next:\n";
+echo "    luany migrate     create the tables\n";
+echo "    luany dev         start the server with live reload  →  http://localhost:8000\n\n";

@@ -5,53 +5,33 @@ namespace App\Exceptions;
 use Luany\Core\Http\Response;
 use Luany\Framework\Exceptions\Handler as BaseHandler;
 
-/**
- * Application Exception Handler
- *
- * Override report() to send errors to external services (Sentry, etc.).
- * Override render() to return custom error views per exception type.
- *
- * Example — custom 404 view in production:
- *   public function render(\Throwable $e): Response
- *   {
- *       if ($e instanceof \Luany\Core\Exceptions\RouteNotFoundException) {
- *           return Response::make(view('pages.errors.404'), 404);
- *       }
- *       return parent::render($e);
- *   }
- */
 class Handler extends BaseHandler
 {
     /**
-     * Exception types that should never be written to logs.
+     * Exception classes that should not be logged.
+     *
+     * @var array<int, class-string<\Throwable>>
      */
-    protected array $dontReport = [
-        // \Luany\Core\Exceptions\RouteNotFoundException::class,
-    ];
+    protected array $dontReport = [];
 
-    public function report(\Throwable $e): void
-    {
-        foreach ($this->dontReport as $type) {
-            if ($e instanceof $type) {
-                return;
-            }
-        }
-
-        parent::report($e);
-    }
-
+    /**
+     * Render errors with the application's views (views/errors/{status}.lte).
+     * In debug mode server errors show the framework's debug page instead.
+     */
     public function render(\Throwable $e): Response
     {
-        // 404 — always show the styled view
-        if ($e instanceof \Luany\Core\Exceptions\RouteNotFoundException) {
-            return Response::make(view('pages.errors.404'), 404);
+        $status = $this->statusCodeFor($e);
+
+        if ($status >= 500 && $this->debug) {
+            return parent::render($e);
         }
 
-        // 500 — styled view in production, framework debug page in development
-        if (!$this->debug) {
-            return Response::make(view('pages.errors.500'), 500);
+        $view = $status === 404 ? 'errors.404' : ($status >= 500 ? 'errors.500' : null);
+
+        if ($view === null) {
+            return parent::render($e);
         }
 
-        return parent::render($e);
+        return Response::make(view($view), $status)->withHeaders($this->headersFor($e));
     }
 }

@@ -2,16 +2,14 @@
 
 use Luany\Database\Seeder\Seeder;
 
-/**
- * DatabaseSeeder
- *
- * Entry point for all seeders — run with: luany db:seed
- * Call individual seeders using $this->call().
- */
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Seed the database: `luany db:seed`.
+     * Generate more seeders with `luany make:seeder` and call them here.
+     */
     public function run(\PDO $pdo): void
     {
-        $this->call(UserSeeder::class);
+        //
     }
 }

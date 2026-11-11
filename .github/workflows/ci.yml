@@ -24,5 +24,5 @@ jobs:
       - name: Validate composer.json
         run: composer validate
 
-      - name: Test autoload
-        run: php -r "require 'vendor/autoload.php'; echo 'Autoload OK' . PHP_EOL;"
+      - name: Run tests
+        run: vendor/bin/phpunit

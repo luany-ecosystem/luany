@@ -1,224 +1,58 @@
-# luany/luany
+# Luany
 
-Official application skeleton for the Luany Framework.
-
-[![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php)](https://php.net)
-[![Framework](https://img.shields.io/badge/luany%2Fframework-v1.0-5B3171?style=flat-square)](https://packagist.org/packages/luany/framework)
-[![License](https://img.shields.io/badge/license-MIT-E6874A?style=flat-square)](LICENSE)
+The application skeleton for the [Luany Framework](https://github.com/luany-ecosystem) — a clean
+starting point with nothing you have to delete first.
 
 ## Requirements
 
-- PHP 8.2+
-- Composer 2.0+
-- Node.js (required for live reload via `luany dev`)
+- PHP 8.2+ with `pdo_sqlite` (or `pdo_mysql` / `pdo_pgsql`)
+- Composer
+- Node.js — only for live reload (`luany dev`)
 
-## Installation
+## Create a project
+
 ```bash
 composer global require luany/cli
-luany new my-app
+luany new my-app            # or: composer create-project luany/luany my-app
 cd my-app
-```
-
-Or directly via Composer:
-```bash
-composer create-project luany/luany my-app
-cd my-app
-```
-
-## Getting started
-```bash
-# 1. Configure your database
-#    Edit DB_HOST, DB_NAME, DB_USER, DB_PASS in .env
-
-# 2. Verify your environment
-luany doctor
-
-# 3. Run migrations
 luany migrate
-
-# 4. Install Node.js dependencies (required for live reload)
-npm install
+luany dev                   # http://localhost:8000 with live reload
 ```
 
-## Development
+A new project uses SQLite out of the box. For MySQL or PostgreSQL, set `DB_CONNECTION`
+and the `DB_*` variables in `.env`.
+
+## Structure
+
+```
+app/
+  Controllers/          HTTP controllers
+  Exceptions/Handler    error pages and reporting
+  Http/Kernel           global middleware
+  Models/               database models
+  Providers/            service providers (app, database)
+bootstrap/app.php       application bootstrap
+config/app.php          name, environment, URL, timezone, locale
+database/
+  migrations/           schema migrations
+  seeders/              database seeders
+public/                 web root (index.php, assets)
+routes/http.php         routes
+storage/                cache, logs, sessions
+tests/                  PHPUnit tests
+views/                  LTE templates (layouts, pages, components, errors)
+```
+
+## Next steps
+
 ```bash
-luany dev
+luany make:feature Post title:string body:text published:boolean   # model, migration, controller, views, routes
+luany view:check                                                    # validate all views
+composer test                                                       # run the test suite
 ```
 
-Starts the **Luany Dev Engine (LDE)** — PHP server + WebSocket live reload. Open `http://localhost:8000`.
-
-> Use `luany serve` for a plain PHP server without live reload.
-
-## luany dev
-```bash
-luany dev
-luany dev localhost 8080          # custom host/port
-luany dev localhost 8000 35730    # custom WebSocket port
-```
-
-| Process | Address | Role |
-|---|---|---|
-| PHP built-in server | `http://localhost:8000` | Serves the application directly |
-| WebSocket server | `ws://localhost:35729` | Delivers reload signals to the browser |
-
-### Live reload strategy
-
-| File changed | Action |
-|---|---|
-| `*.css` | Inject — updates `<link>` href with cache-buster. No page reload. |
-| `*.lte` / `*.php` / `*.js` | Full page reload |
-
-### Requirements
-
-- Node.js installed and available on `PATH`
-- `npm install` run inside the project
-- `APP_ENV=development` in `.env`
-
-### How it works
-```
-Browser ←──────────────────→ PHP   (port 8000) — direct, no proxy
-Browser ←── WebSocket ──────→ Node (port 35729) — reload signals only
-```
-
-`DevMiddleware` intercepts every HTML response and appends the LDE browser client script. The client connects to the WebSocket server started by `luany dev` and applies changes as they arrive.
-
-## Directory structure
-```
-my-app/
-├── app/
-│   ├── Controllers/
-│   ├── Exceptions/
-│   ├── Http/
-│   │   ├── Kernel.php
-│   │   └── Middleware/
-│   ├── Models/
-│   ├── Providers/
-│   └── Support/
-├── bootstrap/
-│   └── app.php
-├── config/
-│   ├── app.php
-│   └── mail.php
-├── database/
-│   └── migrations/
-│   └── seeders/
-├── lang/
-│   ├── en.php
-│   └── pt.php
-├── public/
-│   ├── index.php
-│   └── assets/
-├── routes/
-│   └── http.php
-├── storage/
-│   ├── cache/views/
-│   └── logs/
-├── views/
-│   ├── components/
-│   ├── layouts/
-│   └── pages/
-├── .env.example
-└── composer.json
-```
-
-## Key concepts
-
-**Routing** — defined in `routes/http.php`:
-```php
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/users/{id}', [UserController::class, 'show']);
-```
-
-**Controllers** — extend the base `Controller`:
-```php
-class HomeController extends Controller
-{
-    public function index(Request $request): string
-    {
-        return view('pages.home', compact('data'));
-    }
-}
-```
-
-**Views** — LTE template engine, stored in `views/`:
-```lte
-@extends('layouts.main')
-
-@section('title')My Page@endsection
-
-@section('content')
-    <h1>{{ $title }}</h1>
-@endsection
-```
-
-**Migrations** — in `database/migrations/`:
-```php
-class CreateUsersTable extends Migration
-{
-    public function up(\PDO $pdo): void
-    {
-        $pdo->exec("CREATE TABLE IF NOT EXISTS `users` (...)");
-    }
-
-    public function down(\PDO $pdo): void
-    {
-        $pdo->exec("DROP TABLE IF EXISTS `users`");
-    }
-}
-```
-
-**Models** — ActiveRecord base:
-```php
-class User extends Model
-{
-    protected string $table   = 'users';
-    protected array $fillable = ['name', 'email', 'password'];
-    protected array $hidden   = ['password'];
-}
-```
-
-## CLI reference
-```bash
-luany make:controller <Name>      # scaffold controller
-luany make:model <Name>           # scaffold model
-luany make:migration <name>       # generate migration file
-luany make:seeder <Name>          # scaffold seeder class
-luany db:seed                     # run database seeders
-luany migrate:fresh --seed        # drop, migrate and seed
-luany make:middleware <Name>      # scaffold middleware
-luany make:view <name> [type]     # create LTE view
-luany make:feature <Name>         # scaffold full CRUD feature
-luany make:request <Name>         # scaffold form request class
-luany make:test <Name>            # scaffold PHPUnit test class
-luany route:list                  # list all registered routes
-luany migrate                     # run pending migrations
-luany migrate:status              # show migration status
-luany migrate:rollback            # rollback last batch
-luany migrate:fresh               # drop all and re-migrate
-luany key:generate                # regenerate APP_KEY
-luany cache:clear                 # clear compiled views
-luany doctor                      # environment health check
-luany serve                       # start PHP server (no live reload)
-luany dev                         # start dev server with live reload
-```
-
-## Deploying to production
-
-Checklist before going live:
-
-1. `.env`: `APP_ENV=production`, `APP_DEBUG=false`, `APP_HTTPS=true` (when served over HTTPS) and a real `APP_URL`.
-2. Point the web server's document root at `public/` — never at the project root.
-3. `composer install --no-dev --optimize-autoloader`.
-4. Make `storage/` writable by the web server user only.
-5. Behind a load balancer / reverse proxy, configure trusted proxies so client IPs and HTTPS detection are correct.
-6. Review the security headers in `public/.htaccess` (enable HSTS once HTTPS-only; add a Content-Security-Policy).
-
-The live-reload client (LDE) is only injected when `APP_ENV=development` **and** the request comes from the loopback interface.
-
-## Documentation
-
-[docs.luany.dev](https://docs.luany.dev)
+Documentation: [docs.luany.dev](https://docs.luany.dev)
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT

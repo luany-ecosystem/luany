@@ -1,13 +1,70 @@
-/* ================================================================
-   Luany — Global CSS Entry Point
-   ================================================================
-   Only truly global styles live here.
-   Component CSS lives inside .lte files via @style/@endstyle.
-   LTE AssetStack deduplicates and injects them at @styles.
+:root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1c1b22;
+    --muted: #6b6878;
+    --accent: #5b3bd6;
+    --surface: #f4f3f8;
+    --radius: 10px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
 
-   Error page styles (404/500) are self-contained inline CSS
-   inside each view — no dependency on this bundle.
-   ================================================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #121118;
+        --fg: #ecebf2;
+        --muted: #9a97a8;
+        --accent: #a48bff;
+        --surface: #1d1b26;
+    }
+}
 
-@import 'base.css';
-@import 'components/buttons.css';
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+}
+
+main { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+
+a { color: var(--accent); }
+
+code {
+    padding: .1rem .35rem;
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: .9em;
+}
+
+.welcome, .error-page { text-align: center; }
+.welcome h1, .error-page h1 { margin: 1rem 0 .25rem; font-size: 2.5rem; }
+.lead { margin: 0 0 2rem; color: var(--muted); font-size: 1.15rem; }
+
+.steps {
+    margin: 0 auto 2rem;
+    padding: 1.25rem 1.5rem;
+    max-width: 560px;
+    list-style: none;
+    text-align: left;
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+.steps li + li { margin-top: .5rem; }
+
+.links { display: flex; gap: 1.5rem; justify-content: center; }
+
+.flash {
+    max-width: 720px;
+    margin: 1rem auto 0;
+    padding: .75rem 1rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border-left: 4px solid var(--accent);
+}
+.flash-success { border-left-color: #22a55a; }
+.flash-error   { border-left-color: #d63b3b; }
+.flash-warning { border-left-color: #d69a1b; }
