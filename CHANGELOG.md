@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## [1.4.3] — 2026-11-16
 
 ### Changed
 - `storage/cache/routes.php` (the route cache read by luany/framework 1.4) is git-ignored — it is built per deploy.
