@@ -8,13 +8,6 @@ use Luany\Framework\Exceptions\Handler as BaseHandler;
 class Handler extends BaseHandler
 {
     /**
-     * Exception classes that should not be logged.
-     *
-     * @var array<int, class-string<\Throwable>>
-     */
-    protected array $dontReport = [];
-
-    /**
      * Render errors with the application's views (views/errors/{status}.lte).
      * In debug mode server errors show the framework's debug page instead.
      */
