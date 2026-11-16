@@ -6,6 +6,12 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Fixed
+- `storage/sessions/` is git-ignored — session files (CSRF tokens, user data) were picked up by `git add`.
+- `App\Exceptions\Handler` no longer empties `$dontReport`, so 404s, `abort()` and validation errors are not logged as errors again.
+
 ## [1.4.1] — 2026-11-11
 
 ### Fixed
