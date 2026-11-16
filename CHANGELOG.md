@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## [1.4.2] — 2026-11-16
 
 ### Fixed
 - `storage/sessions/` is git-ignored — session files (CSRF tokens, user data) were picked up by `git add`.
