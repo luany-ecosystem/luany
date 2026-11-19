@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## [1.5.0] — 2026-11-19
 
 ### Changed
 - **Luany design system**: the welcome page, error pages, flash messages and global styles use the Luany identity — the real Luany mark (favicon, Apple touch icon), ink / crescent purple → coral → orange palette, Plus Jakarta Sans + Inter + JetBrains Mono, light and dark (system) themes.
