@@ -6,6 +6,16 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Changed
+- **Luany design system**: the welcome page, error pages, flash messages and global styles use the Luany identity — the real Luany mark (favicon, Apple touch icon), ink / crescent purple → coral → orange palette, Plus Jakarta Sans + Inter + JetBrains Mono, light and dark (system) themes.
+- The welcome page shows the next steps (add a page, `make:feature`, `luany dev`) with links to the docs, and the PHP / luany/framework versions and `APP_ENV`. Its CSS and JS live in `views/pages/home.lte` (LTE `@style` / `@script`), so deleting the page leaves nothing behind.
+- `public/assets/css/app.css` keeps only the design tokens, base styles, buttons and flash messages.
+
+### Removed
+- `public/favicon.svg` (placeholder) — replaced by `favicon.ico`, `favicon-32x32.png` and `apple-touch-icon.png`.
+
 ## [1.4.3] — 2026-11-16
 
 ### Changed
