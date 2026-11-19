@@ -1,11 +1,27 @@
 @extends('layouts.main')
 
-@section('title', 'Server error')
+@section('title', 'Something went wrong')
+
+@style
+.error-page {
+    min-height: 100vh; display: grid; place-content: center; justify-items: center; gap: 1rem;
+    padding: 3rem 1.5rem; text-align: center;
+}
+.error-page img { width: 88px; height: 88px; }
+.error-page .code {
+    font: 800 clamp(4.5rem, 3rem + 8vw, 8rem)/1 var(--font-display); letter-spacing: -.05em;
+    background: var(--gradient-text); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.error-page h1 { font-size: 1.8rem; }
+.error-page p { max-width: 42ch; color: var(--muted); margin-bottom: .5rem; }
+@endstyle
 
 @section('content')
-<section class="error-page">
-    <h1>500</h1>
-    <p>Something went wrong on our side. Please try again later.</p>
-    <a href="{{ url('/') }}">Back to home</a>
-</section>
+<main class="error-page">
+    <img src="{{ asset('images/luany-mark-256.webp') }}" alt="" width="88" height="88">
+    <p class="code">500</p>
+    <h1>Something went wrong</h1>
+    <p>The error was logged. Please try again in a moment.</p>
+    <a class="btn btn-primary" href="{{ url('/') }}">Back to home</a>
+</main>
 @endsection

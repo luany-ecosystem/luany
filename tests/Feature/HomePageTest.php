@@ -22,6 +22,15 @@ class HomePageTest extends TestCase
         $response = $this->handle('GET', '/');
 
         $this->assertSame(200, $response->getStatusCode());
-        $this->assertStringContainsString('Your application is ready.', $response->getBody());
+        $this->assertStringContainsString('is ready.', $response->getBody());
+        $this->assertStringContainsString('images/luany-mark-64.webp', $response->getBody());
+    }
+
+    public function test_unknown_page_renders_the_404_view(): void
+    {
+        $response = $this->handle('GET', '/does-not-exist');
+
+        $this->assertSame(404, $response->getStatusCode());
+        $this->assertStringContainsString('Page not found', $response->getBody());
     }
 }
