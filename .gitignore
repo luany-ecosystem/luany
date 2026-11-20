@@ -4,7 +4,10 @@ composer.lock
 
 # Environment
 .env
-.env.local
+.env.*
+!.env.example
+!.env.encrypted
+!.env.*.encrypted
 
 # Cache & logs
 /storage/cache/views/*
