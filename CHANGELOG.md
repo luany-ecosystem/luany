@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## [1.5.1] — 2026-11-20
 
 ### Changed
 - `.gitignore` ignores every plain `.env.*` file (`.env.production`, `.env.local`, …) but keeps `.env.example` and the encrypted `.env.*.encrypted` files (luany/framework 1.6, `luany env:encrypt`) committable.
