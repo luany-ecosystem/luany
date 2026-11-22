@@ -6,6 +6,11 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Added
+- `LUANY_DEV_LANGUAGE` (`config/app.php` → `dev_language`, default `en`): `pt` shows the CLI messages in Portuguese (luany/cli 1.11).
+
 ## [1.6.0] — 2026-11-22
 
 ### Added
