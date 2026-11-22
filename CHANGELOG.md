@@ -6,6 +6,11 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [Unreleased]
+
+### Added
+- `config/app.php` → `syntax` (`LUANY_SYNTAX`, default `en`): set `pt` to write views with the Portuguese directive names (`@se`, `@paracada`, `@secao`…). Needs luany/framework 1.7 / luany/lte 1.4.
+
 ## [1.5.1] — 2026-11-20
 
 ### Changed
