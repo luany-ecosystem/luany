@@ -11,4 +11,8 @@ return [
     'locale'            => env('APP_LOCALE', 'en'),
     'fallback_locale'   => 'en',
     'supported_locales' => ['en'],
+
+    // Template syntax: 'pt' adds Portuguese directive names (@se, @paracada,
+    // @secao…) to the English ones in .lte views.
+    'syntax' => env('LUANY_SYNTAX', 'en'),
 ];
