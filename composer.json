@@ -21,7 +21,7 @@
     "homepage": "https://github.com/luany-ecosystem/luany",
     "require": {
         "php": ">=8.2",
-        "luany/framework": "^1.3",
+        "luany/framework": "^1.10",
         "luany/database": "^1.7"
     },
     "require-dev": {
