@@ -6,7 +6,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [Unreleased]
+## [1.7.0] — 2026-11-23
 
 ### Added
 - `config/mail.php` and the `MAIL_*` keys in `.env.example`: emails go to the log by default (`MAIL_MAILER=log`); set `smtp` and the `MAIL_HOST`… keys to send for real (requires luany/framework 1.10).
